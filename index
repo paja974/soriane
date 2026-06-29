@@ -1,0 +1,2584 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SORIANE — Be fully realised</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --noir: #0D0D0D;
+      --or: #C9A84C;
+      --or-clair: #E8C96A;
+      --or-pale: rgba(201,168,76,0.12);
+      --creme: #F5F0E8;
+      --ardoise: #1E1E28;
+      --gris: #2A2A35;
+      --texte-muted: #8A8A9A;
+      --blanc: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; background: var(--noir); }
+
+    body {
+      background: var(--noir);
+      color: var(--creme);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      transition: padding 0.3s;
+    }
+
+    .nav-logo {
+      color: var(--or);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--creme);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      opacity: 0.75;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 1; color: var(--or); }
+
+    .nav-cta {
+      border: 1px solid var(--or);
+      color: var(--or) !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 2px;
+      opacity: 1 !important;
+      transition: background 0.2s, color 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--or) !important; color: var(--noir) !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      position: relative;
+      padding: 6rem 3rem 4rem;
+      overflow: hidden;
+      gap: 2rem;
+      background: var(--noir);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(201,168,76,0.07) 0%, transparent 70%),
+                  radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-anim-wrap {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 680px;
+    }
+
+    #heroCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--or);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1.08;
+      font-weight: 600;
+      color: var(--blanc);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--or);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--texte-muted);
+      max-width: 480px;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {}
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--or);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--texte-muted);
+      margin-top: 0.35rem;
+    }
+
+    .stat-divider {
+      width: 1px;
+      background: rgba(201,168,76,0.25);
+      align-self: stretch;
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      width: 3rem;
+      height: 2px;
+      background: var(--or);
+      margin: 0 auto 1rem;
+    }
+
+    /* ── SECTIONS COMMUNES ── */
+    section {
+      padding: 7rem 3rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--blanc);
+      font-weight: 600;
+    }
+
+    .section-sub {
+      color: var(--texte-muted);
+      max-width: 520px;
+      margin: 1rem auto 0;
+      line-height: 1.75;
+    }
+
+    /* ── ADN / IDENTITÉ ── */
+    #adn {
+      background: var(--ardoise);
+    }
+
+    .adn-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.1);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .adn-card {
+      background: var(--ardoise);
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .adn-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--or);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .adn-card:hover { background: rgba(201,168,76,0.05); }
+    .adn-card:hover::before { transform: scaleX(1); }
+
+    .adn-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--or);
+    }
+
+    .adn-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--blanc);
+      margin-bottom: 0.75rem;
+    }
+
+    .adn-card p {
+      font-size: 0.88rem;
+      color: var(--texte-muted);
+      line-height: 1.8;
+    }
+
+    /* ── PARTICIPATIONS ── */
+    #participations {
+      background: var(--noir);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .participations-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(201,168,76,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Réseau SVG central */
+    .network-canvas {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 5rem;
+      position: relative;
+    }
+
+    .network-svg {
+      width: 100%;
+      max-width: 860px;
+      height: auto;
+    }
+
+    .participations-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .part-card {
+      background: var(--ardoise);
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: 3px;
+      padding: 2rem 2.25rem;
+      position: relative;
+      transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s ease;
+      overflow: hidden;
+      cursor: default;
+      /* Touch devices : active state */
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Barre dorée gauche */
+    .part-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--or) 0%, rgba(201,168,76,0.3) 100%);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.45s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    /* Shimmer sweep */
+    .part-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(105deg, transparent 40%, rgba(201,168,76,0.06) 50%, transparent 60%);
+      transition: left 0.6s ease;
+      pointer-events: none;
+    }
+
+    /* Hover / Active (touch) */
+    .part-card:hover,
+    .part-card.touched {
+      border-color: rgba(201,168,76,0.45);
+      transform: translateY(-5px);
+      box-shadow:
+        0 12px 40px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(201,168,76,0.08),
+        0 0 30px rgba(201,168,76,0.06);
+    }
+
+    .part-card:hover::after,
+    .part-card.touched::after { transform: scaleY(1); }
+
+    .part-card:hover::before,
+    .part-card.touched::before { left: 140%; }
+
+    /* Titre de carte éclairé au hover */
+    .part-card:hover .part-name,
+    .part-card.touched .part-name {
+      color: var(--or-clair);
+      transition: color 0.3s ease;
+    }
+
+    /* Valeurs méta éclairées */
+    .part-card:hover .part-meta-val,
+    .part-card.touched .part-meta-val {
+      color: var(--or-clair);
+      transition: color 0.3s ease;
+    }
+
+    .part-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--or);
+      border: 1px solid rgba(201,168,76,0.4);
+      padding: 0.2rem 0.65rem;
+      border-radius: 1px;
+      margin-bottom: 1.25rem;
+    }
+
+    .part-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--blanc);
+      margin-bottom: 0.4rem;
+    }
+
+    .part-desc {
+      font-size: 0.85rem;
+      color: var(--texte-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .part-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 1.25rem;
+    }
+
+    .part-meta-item {}
+    .part-meta-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--or);
+      font-weight: 600;
+    }
+    .part-meta-key {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--texte-muted);
+    }
+
+    /* ── APPROCHE ── */
+    #approche {
+      background: var(--ardoise);
+    }
+
+    .approche-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .approche-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      color: var(--blanc);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .approche-text h2 em {
+      font-style: italic;
+      color: var(--or);
+    }
+
+    .approche-text p {
+      color: var(--texte-muted);
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+      font-size: 0.92rem;
+    }
+
+    .approche-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .approche-list li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .approche-list .bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--or);
+      margin-top: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .approche-list span {
+      font-size: 0.88rem;
+      color: var(--texte-muted);
+      line-height: 1.7;
+    }
+
+    .approche-visual {
+      position: relative;
+    }
+
+    .approche-chart {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    /* ── IMPLANTATION ── */
+    #implantation {
+      background: var(--noir);
+      text-align: center;
+    }
+
+    .implantation-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .implantation-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--or-pale);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--or);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.25rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+
+    .implantation-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--blanc);
+      margin-bottom: 1.5rem;
+    }
+
+    .implantation-text {
+      color: var(--texte-muted);
+      font-size: 0.95rem;
+      line-height: 1.85;
+      margin-bottom: 3rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--ardoise);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .contact-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.25rem;
+      color: var(--blanc);
+      margin-bottom: 1rem;
+    }
+
+    .contact-left p {
+      color: var(--texte-muted);
+      font-size: 0.9rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-info-item {
+      display: flex;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    .contact-info-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      background: var(--or-pale);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--or);
+      flex-shrink: 0;
+    }
+
+    .contact-info-text {
+      font-size: 0.85rem;
+      color: var(--texte-muted);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--texte-muted);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--creme);
+      padding: 0.75rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--or);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .form-group select option { background: var(--ardoise); }
+
+    .btn-gold {
+      background: var(--or);
+      color: var(--noir);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      align-self: flex-start;
+    }
+
+    .btn-gold:hover { background: var(--or-clair); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080808;
+      border-top: 1px solid rgba(201,168,76,0.12);
+      padding: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--or);
+    }
+
+    .footer-legal {
+      font-size: 0.75rem;
+      color: var(--texte-muted);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .footer-right {
+      font-size: 0.72rem;
+      color: var(--texte-muted);
+      text-align: right;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes drawLine {
+      from { stroke-dashoffset: 1000; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes pulse-or {
+      0%, 100% { opacity: 0.6; r: 6; }
+      50% { opacity: 1; r: 8; }
+    }
+
+    .fade-up {
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.45s; }
+    .delay-4 { animation-delay: 0.6s; }
+
+    /* ── MAYOTTE WIDE ── */
+    .mayotte-wide {
+      grid-column: 1 / -1;
+    }
+
+    .mayotte-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .mayotte-left {}
+
+    .mayotte-meta {
+      border-top: none !important;
+      padding-top: 0 !important;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+      .hero-anim-wrap { display: none; }
+      section { padding: 5rem 1.5rem; }
+      .adn-grid { grid-template-columns: 1fr; }
+      .approche-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-right { text-align: center; }
+      /* Deux myriades : 1 colonne sur mobile */
+      #approche [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+      .mayotte-inner { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+      .mayotte-meta { flex-direction: row !important; flex-wrap: wrap !important; }
+      /* Cards grille 1 col sur petit écran */
+      .participations-cards { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">
+      <svg width="160" height="48" viewBox="-8 -6 160 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- SORIANE — baseline y=30 -->
+        <text x="2" y="30" font-family="Inter,sans-serif" font-size="18" font-weight="800" fill="#C9A84C" letter-spacing="3">SORIANE</text>
+        <text x="2" y="41" font-family="Inter,sans-serif" font-size="6" font-weight="300" fill="rgba(201,168,76,0.5)" letter-spacing="2.5">BE FULLY REALISED</text>
+
+        <!-- Nœud central : cx=51, cy=6 (au-dessus du I) -->
+
+        <!-- GAUCHE courte -->
+        <line x1="51" y1="6" x2="34" y2="6"  stroke="#C9A84C" stroke-width="1.3" opacity="0.82"/>
+        <circle cx="34" cy="6"  r="2.2" fill="#C9A84C" opacity="0.82"/>
+
+        <!-- DROITE longue -->
+        <line x1="51" y1="6" x2="78" y2="6"  stroke="#C9A84C" stroke-width="1.1" opacity="0.75"/>
+        <circle cx="78" cy="6"  r="2.8" fill="#C9A84C" opacity="0.75"/>
+
+        <!-- HAUT-GAUCHE moyenne -->
+        <line x1="51" y1="6" x2="37" y2="-1" stroke="#C9A84C" stroke-width="1.2" opacity="0.85"/>
+        <circle cx="37" cy="-1" r="2"   fill="#C9A84C" opacity="0.85"/>
+
+        <!-- HAUT-DROIT courte -->
+        <line x1="51" y1="6" x2="62" y2="0"  stroke="#C9A84C" stroke-width="1.0" opacity="0.78"/>
+        <circle cx="62" cy="0"  r="1.7" fill="#C9A84C" opacity="0.78"/>
+
+        <!-- GAUCHE très longue — Mayotte -->
+        <line x1="51" y1="6" x2="14" y2="4"  stroke="#C9A84C" stroke-width="0.7" opacity="0.40"/>
+        <circle cx="14" cy="4"  r="1.3" fill="#C9A84C" opacity="0.40"/>
+
+        <!-- DROITE très longue — Madagascar -->
+        <line x1="51" y1="6" x2="98" y2="3"  stroke="#C9A84C" stroke-width="0.6" opacity="0.25"/>
+        <circle cx="98" cy="3"  r="1"   fill="#C9A84C" opacity="0.25"/>
+
+        <!-- HAUT pur courte -->
+        <line x1="51" y1="6" x2="51" y2="-3" stroke="#C9A84C" stroke-width="0.8" opacity="0.55"/>
+        <circle cx="51" cy="-3" r="1.4" fill="#C9A84C" opacity="0.55"/>
+
+        <!-- Connexions secondaires -->
+        <line x1="37" y1="-1" x2="62" y2="0"  stroke="#C9A84C" stroke-width="0.4" opacity="0.13"/>
+        <line x1="34" y1="6"  x2="14" y2="4"  stroke="#C9A84C" stroke-width="0.35" opacity="0.10"/>
+
+        <!-- Bulle centrale = point décoratif au-dessus du I -->
+        <circle cx="51" cy="6" r="3.5" fill="#C9A84C"/>
+
+      </svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#adn">Identité</a></li>
+      <li><a href="#approche">Approche</a></li>
+      <li><a href="#participations">Participations</a></li>
+      <li><a href="#implantation">Territoire</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow fade-up">Société d'investissement · Territoires insulaires</p>
+      <h1 class="hero-title fade-up delay-1">
+        Investir avec<br><em>conviction</em><br>dans la durée.
+      </h1>
+      <p class="hero-sub fade-up delay-2">
+        SORIANE investit en direct et co-investit avec des partenaires sélectifs : défiscalisation immobilière, participations dans le numérique, immobilier locatif — à La Réunion, Mayotte et Madagascar.
+      </p>
+      <div class="hero-stats fade-up delay-3">
+        <div class="stat-item">
+          <div class="stat-num">2,5M€+</div>
+          <div class="stat-label">Déjà investis</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Participations en cours</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num">Indian Ocean</div>
+          <div class="stat-label">La Réunion · Mayotte · Madagascar</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Animation réseau interactive à droite -->
+    <div class="hero-anim-wrap fade-up delay-2">
+      <canvas id="heroCanvas"></canvas>
+    </div>
+  </section>
+
+  <!-- ADN -->
+  <section id="adn">
+    <div class="section-header">
+      <p class="section-eyebrow">Notre identité</p>
+      <div class="section-divider"></div>
+      <h2 class="section-title">Votre partenaire d'investissement dans l'Indian Ocean</h2>
+      <p class="section-sub">SORIANE investit son propre capital dans chaque opération : c'est ainsi qu'elle prend ses participations. Défiscalisation immobilière, immobilier locatif, édition logicielle — nous co-investissons avec des partenaires qui partagent notre vision. Votre capital ou votre foncier rejoignent le nôtre pour monter des opérations à forte valeur ajoutée.</p>
+    </div>
+    <div class="adn-grid">
+      <div class="adn-card">
+        <svg class="adn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+        <h3>Ingénierie &amp; Innovation</h3>
+        <p>Défiscalisation immobilière maîtrisée — SCI dédiée, permis, SPANC, livraison clé en main. Et au-delà : édition SaaS et applications mobiles pour générer des revenus récurrents à côté des actifs physiques.</p>
+      </div>
+      <div class="adn-card">
+        <svg class="adn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+        </svg>
+        <h3>Rendement & visibilité</h3>
+        <p>Chaque opération est structurée pour offrir une visibilité claire : avantage fiscal Girardin dès l'année 1, revenus locatifs sur des biens résidentiels neufs, ou royalties SaaS sur des logiciels en production.</p>
+      </div>
+      <div class="adn-card">
+        <svg class="adn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <h3>SORIANE investit avec vous</h3>
+        <p>SORIANE met son propre capital dans chaque opération — c'est le fondement de ses participations. Vous co-investissez à nos côtés : foncier, capital ou expertise. Nous structurons, nous opérons, et nous partageons le risque.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- APPROCHE -->
+  <section id="approche">
+
+    <!-- En-tête section -->
+    <div class="section-header" style="margin-bottom:3rem;">
+      <p class="section-eyebrow">Notre approche</p>
+      <div class="section-divider"></div>
+      <h2 class="section-title">Structuré. Encadré. Maîtrisé.</h2>
+      <p class="section-sub">SORIANE co-investit en direct et s'entoure de professionnels reconnus pour sécuriser chaque opération — taux négociés, coûts maîtrisés, zéro improvisation.</p>
+    </div>
+
+    <!-- Myriade partenaires pleine largeur -->
+    <div style="max-width:1100px; margin:0 auto 4rem; background:var(--noir); border:1px solid rgba(201,168,76,0.14); border-radius:3px; padding:2.5rem 2rem;">
+      <div style="text-align:center; margin-bottom:0.5rem;">
+        <p style="font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--or);">Nos partenaires</p>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--blanc); margin-top:0.4rem; font-weight:600;">Une myriade d'experts qui gravitent autour de chaque projet</h3>
+      </div>
+      <canvas id="myriadePartners" style="width:100%; aspect-ratio:4/3; height:auto; display:block;"></canvas>
+      <p style="font-size:0.85rem; color:var(--texte-muted); line-height:1.8; text-align:center; max-width:680px; margin:1.25rem auto 0;">Chaque opération est encadrée de A à Z : fiscalité sécurisée, taux bancaires négociés, actes notariés, terrain sourcé, chantier suivi. Nous investissons — ils encadrent.</p>
+    </div>
+
+    <!-- Bloc texte approche -->
+    <div class="approche-layout" style="margin-top:0;">
+      <div class="approche-text">
+        <p class="section-eyebrow" style="text-align:left; margin-bottom:0.75rem;">Pourquoi SORIANE</p>
+        <h2>Co-investisseur. <em>Pas intermédiaire.</em></h2>
+        <p>SORIANE engage son propre capital dans chaque opération — c'est ce qui fonde ses participations. Vous co-investissez à nos côtés : capital, foncier ou expertise numérique. Nous structurons, nous opérons, nous partageons le risque. Dans tous les cas, nous sommes dans le même bateau.</p>
+        <p>De la recherche du terrain à la remise des clés, chaque étape est maîtrisée par le réseau SORIANE : faisabilité, budgétisation, calcul de rentabilité, montage fiscal, financement, construction, livraison. Vous n'avez pas à coordonner — nous le faisons.</p>
+        <ul class="approche-list">
+          <li><span class="bullet"></span><span>Recherche foncière — agents terrain et réseau SORIANE pour identifier les bonnes opportunités</span></li>
+          <li><span class="bullet"></span><span>Étude de faisabilité et analyse PLU, CDPENAF, contraintes réglementaires</span></li>
+          <li><span class="bullet"></span><span>Budgétisation complète et calcul de rentabilité avant tout engagement</span></li>
+          <li><span class="bullet"></span><span>Défiscalisation immobilière — individuel et collectif, La Réunion et Mayotte</span></li>
+          <li><span class="bullet"></span><span>Taux bancaires négociés et coûts de construction maîtrisés</span></li>
+          <li><span class="bullet"></span><span>SCI dédiée par opération — transparence juridique et fiscale totale</span></li>
+          <li><span class="bullet"></span><span>Suivi de chantier jusqu'à la livraison clé en main</span></li>
+          <li><span class="bullet"></span><span>Participations numériques à revenus récurrents (SaaS, application mobile)</span></li>
+        </ul>
+
+
+      </div>
+
+      <div class="approche-visual">
+        <svg class="approche-chart" viewBox="0 0 420 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="420" height="340" rx="2" fill="rgba(13,13,13,0.6)" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+          <text x="210" y="35" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#8A8A9A" letter-spacing="2">RÉPARTITION SECTORIELLE</text>
+          <line x1="30" y1="45" x2="390" y2="45" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
+          <circle cx="210" cy="160" r="90" stroke="rgba(255,255,255,0.05)" stroke-width="28" fill="none"/>
+          <circle cx="210" cy="160" r="90" stroke="#C9A84C" stroke-width="28" fill="none" stroke-dasharray="283 565" stroke-dashoffset="0" transform="rotate(-90 210 160)"/>
+          <circle cx="210" cy="160" r="90" stroke="#8A8A9A" stroke-width="28" fill="none" stroke-dasharray="170 678" stroke-dashoffset="-283" transform="rotate(-90 210 160)" opacity="0.6"/>
+          <circle cx="210" cy="160" r="90" stroke="#E8C96A" stroke-width="28" fill="none" stroke-dasharray="68 980" stroke-dashoffset="-453" transform="rotate(-90 210 160)" opacity="0.5"/>
+          <circle cx="210" cy="160" r="90" stroke="#5A5A7A" stroke-width="28" fill="none" stroke-dasharray="45 1100" stroke-dashoffset="-521" transform="rotate(-90 210 160)" opacity="0.7"/>
+          <circle cx="210" cy="160" r="55" fill="rgba(13,13,13,0.95)" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
+          <text x="210" y="155" text-anchor="middle" font-family="'Playfair Display', serif" font-size="22" fill="#C9A84C" font-weight="700">10+</text>
+          <text x="210" y="172" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#8A8A9A" letter-spacing="1">PARTICIPATIONS</text>
+          <rect x="30" y="275" width="10" height="10" fill="#C9A84C"/>
+          <text x="46" y="284" font-family="'Inter', sans-serif" font-size="10" fill="#8A8A9A">Immobilier défiscalisé — 50%</text>
+          <rect x="160" y="275" width="10" height="10" fill="#8A8A9A" opacity="0.7"/>
+          <text x="176" y="284" font-family="'Inter', sans-serif" font-size="10" fill="#8A8A9A">IT / SaaS — 30%</text>
+          <rect x="258" y="275" width="10" height="10" fill="#E8C96A" opacity="0.7"/>
+          <text x="274" y="284" font-family="'Inter', sans-serif" font-size="10" fill="#8A8A9A">Locatif — 12%</text>
+          <rect x="30" y="300" width="10" height="10" fill="#5A5A7A"/>
+          <text x="46" y="309" font-family="'Inter', sans-serif" font-size="10" fill="#8A8A9A">Projets — 8%</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTENAIRES -->
+  <section style="background:var(--noir); padding:0 3rem 5rem;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <p style="font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--or); margin-bottom:1.25rem;">Nos partenaires au service de notre investissement</p>
+      <div class="adn-grid" style="grid-template-columns:repeat(2,1fr);">
+
+        <div class="adn-card">
+          <svg class="adn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <h3>Faisabilité</h3>
+          <p>Agents fonciers, géomètre, bureau d'études et architecte agréé — identification des opportunités et validation de la constructibilité avant tout engagement.</p>
+        </div>
+
+        <div class="adn-card">
+          <svg class="adn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <h3>Expertise juridique &amp; fiscale</h3>
+          <p>Fiscaliste défiscalisation, expert-comptable, notaire à La Réunion et à Mayotte. Banque partenaire avec taux négociés — chaque montage est sécurisé en amont.</p>
+        </div>
+
+        <div class="adn-card">
+          <svg class="adn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+          </svg>
+          <h3>Construction &amp; gestion</h3>
+          <p>Constructeur agréé, maître d'œuvre, agence locative et gestionnaire de patrimoine — suivi de chantier, livraison clé en main et exploitation locative.</p>
+        </div>
+
+        <div class="adn-card">
+          <svg class="adn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+          <h3>Numérique &amp; logiciel</h3>
+          <p>Développeurs, chefs de projet IT, intégrateurs — pour nos participations SaaS et applicatives. Les mêmes exigences de compétence côté tech que côté immo.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PARTICIPATIONS -->
+  <section id="participations">
+    <div class="participations-bg"></div>
+    <div class="section-header" style="position:relative; z-index:1;">
+      <p class="section-eyebrow">Portefeuille</p>
+      <div class="section-divider"></div>
+      <h2 class="section-title">Des exemples concrets</h2>
+      <p class="section-sub">Plus de 2,5 millions d'euros déjà investis. Voici les projets portés par SORIANE — chacun une démonstration de notre capacité à structurer, financer et livrer.</p>
+    </div>
+
+    <!-- Schéma réseau -->
+    <div class="network-canvas" style="position:relative; z-index:1;">
+      <svg class="network-svg" viewBox="0 0 1140 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Lignes depuis SORIANE central (570, 210) -->
+        <line x1="570" y1="210" x2="90"  y2="210" stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="8 4" opacity="0.5"/>
+        <line x1="570" y1="210" x2="270" y2="70"  stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="8 4" opacity="0.5"/>
+        <line x1="570" y1="210" x2="270" y2="350" stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="8 4" opacity="0.5"/>
+        <line x1="570" y1="210" x2="870" y2="70"  stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="8 4" opacity="0.5"/>
+        <line x1="570" y1="210" x2="870" y2="350" stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="8 4" opacity="0.5"/>
+        <line x1="570" y1="210" x2="1050" y2="210" stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="8 4" opacity="0.5"/>
+
+
+        <!-- ── SORIANE central ── -->
+        <circle cx="570" cy="210" r="54" fill="rgba(201,168,76,0.1)" stroke="#C9A84C" stroke-width="2.5"/>
+        <circle cx="570" cy="210" r="40" fill="rgba(201,168,76,0.18)"/>
+        <text x="570" y="204" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" fill="#C9A84C" font-weight="800" letter-spacing="2">SORIANE</text>
+        <text x="570" y="222" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="rgba(201,168,76,0.65)" letter-spacing="1.5">INVEST.</text>
+
+        <!-- ── 10Positif ── -->
+        <circle cx="90" cy="210" r="40" fill="rgba(18,18,28,0.98)" stroke="#C9A84C" stroke-width="2"/>
+        <text x="90" y="204" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#C9A84C" font-weight="700">10POSITIF</text>
+        <text x="90" y="219" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#9A9AAA">IT / ESN</text>
+
+
+
+        <!-- ── SCI Zirondelles 233 ── -->
+        <circle cx="270" cy="70" r="40" fill="rgba(18,18,28,0.98)" stroke="#C9A84C" stroke-width="2"/>
+        <text x="270" y="64" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" fill="#C9A84C" font-weight="700">ZIRONDELLES</text>
+        <text x="270" y="79" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#9A9AAA">SCI · 233</text>
+
+        <!-- ── SCI Libertalia 11 ── -->
+        <circle cx="270" cy="350" r="40" fill="rgba(18,18,28,0.98)" stroke="#C9A84C" stroke-width="2"/>
+        <text x="270" y="344" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" fill="#C9A84C" font-weight="700">LIBERTALIA</text>
+        <text x="270" y="359" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#9A9AAA">SCI · 11</text>
+
+        <!-- ── SCI Manosa ── -->
+        <circle cx="870" cy="70" r="40" fill="rgba(18,18,28,0.98)" stroke="#C9A84C" stroke-width="2"/>
+        <text x="870" y="61" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#C9A84C" font-weight="700">MANOSA</text>
+        <text x="870" y="74" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#9A9AAA">SCI</text>
+        <text x="870" y="86" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="#6A6A7A">St-Leu</text>
+
+        <!-- ── SCI Latanier 10 ── -->
+        <circle cx="870" cy="350" r="40" fill="rgba(18,18,28,0.98)" stroke="#C9A84C" stroke-width="2"/>
+        <text x="870" y="341" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" fill="#C9A84C" font-weight="700">LATANIER</text>
+        <text x="870" y="354" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#9A9AAA">SCI · 10</text>
+        <text x="870" y="366" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="#6A6A7A">L'Étang-Salé</text>
+
+        <!-- ── Lithopedia ── -->
+        <circle cx="1050" cy="210" r="40" fill="rgba(18,18,28,0.98)" stroke="#C9A84C" stroke-width="2"/>
+        <text x="1050" y="204" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" fill="#C9A84C" font-weight="700">LITHOPEDIA</text>
+        <text x="1050" y="219" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#9A9AAA">App Mobile</text>
+      </svg>
+    </div>
+
+    <div class="participations-cards" style="position:relative; z-index:1;">
+
+      <!-- ── 10POSITIF (1er investissement) ── -->
+      <div class="part-card">
+        <span class="part-badge">IT &amp; Numérique</span>
+        <h3 class="part-name">10Positif</h3>
+        <p class="part-desc">ESN basée à La Réunion, spécialisée en développement sur mesure et édition logicielle. Éditeur de <strong style="color:var(--or-clair)">Lithopedia</strong>, application mobile disponible sur iOS &amp; Android, et partenaire technologique de référence dans le secteur de la LLD.</p>
+        <div class="part-meta">
+          <div class="part-meta-item">
+            <div class="part-meta-val">SARL</div>
+            <div class="part-meta-key">Forme juridique</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">Ste-Clotilde</div>
+            <div class="part-meta-key">Siège · Nord</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">Active</div>
+            <div class="part-meta-key">Statut</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCI ZIRONDELLES 233 ── -->
+      <div class="part-card">
+        <span class="part-badge">Immobilier · SCI</span>
+        <h3 class="part-name">SCI Zirondelles 233</h3>
+        <p class="part-desc">Deux villas T5 avec piscine, secteur Ouest de La Réunion. Opération montée en montage en défiscalisation : réduction fiscale dès l'année 1, bien livré clé en main, rendement locatif immédiat. Un modèle que SORIANE a monté en y investissant son propre capital — et qu'elle propose à des co-investisseurs pour les prochaines opérations.</p>
+        <div class="part-meta">
+          <div class="part-meta-item">
+            <div class="part-meta-val">SCI</div>
+            <div class="part-meta-key">Forme juridique</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">St-Paul</div>
+            <div class="part-meta-key">Localisation</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">Active</div>
+            <div class="part-meta-key">Statut</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCI LATANIER 10 ── -->
+      <div class="part-card">
+        <span class="part-badge">Immobilier · SCI</span>
+        <h3 class="part-name">SCI Latanier 10</h3>
+        <p class="part-desc">Villa T5 avec piscine à L'Étang-Salé. Opération montée en défiscalisation avec apport foncier du partenaire et capital SORIANE. La démonstration qu'un terrain suffit pour lancer une opération Girardin — SORIANE finance la construction.</p>
+        <div class="part-meta">
+          <div class="part-meta-item">
+            <div class="part-meta-val">SCI</div>
+            <div class="part-meta-key">Forme juridique</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">L'Étang-Salé</div>
+            <div class="part-meta-key">Localisation</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">Active</div>
+            <div class="part-meta-key">Statut</div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- ── SCI MANOSA ── -->
+      <div class="part-card">
+        <span class="part-badge">Immobilier · SCI</span>
+        <h3 class="part-name">SCI Manosa</h3>
+        <p class="part-desc">Nouvelle opération en cours de montage à St-Leu. Terrain acquis, permis en instruction — preuve de notre capacité à identifier, structurer et activer rapidement une opération de défiscalisation de bout en bout.</p>
+        <div class="part-meta">
+          <div class="part-meta-item">
+            <div class="part-meta-val">SCI</div>
+            <div class="part-meta-key">Forme juridique</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">St-Leu</div>
+            <div class="part-meta-key">Localisation</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">En cours</div>
+            <div class="part-meta-key">Statut</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TI CAZ LILINE ── -->
+      <div class="part-card">
+        <span class="part-badge">Location saisonnière</span>
+        <h3 class="part-name">Ti Caz Liline</h3>
+        <p class="part-desc">Gîte de charme à Ravine des Cabris, St-Pierre (Sud). Hébergement touristique authentique au cœur des hauts du Sud réunionnais — confort, nature et immersion créole.</p>
+        <div class="part-meta">
+          <div class="part-meta-item">
+            <div class="part-meta-val">Gîte</div>
+            <div class="part-meta-key">Forme</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">Ravine des Cabris</div>
+            <div class="part-meta-key">Localisation</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">Active</div>
+            <div class="part-meta-key">Statut</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCI LIBERTALIA 11 ── -->
+      <div class="part-card">
+        <span class="part-badge">Location saisonnière · SCI</span>
+        <h3 class="part-name">SCI Libertalia 11</h3>
+        <p class="part-desc">Villa de prestige en location touristique à Trois-Bassins, secteur Ouest. T6 haut de gamme (180 m², piscine, 12 personnes) ciblant la clientèle premium. Actif à fort rendement locatif saisonnier.</p>
+        <div class="part-meta">
+          <div class="part-meta-item">
+            <div class="part-meta-val">SCI</div>
+            <div class="part-meta-key">Forme juridique</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">180 m²</div>
+            <div class="part-meta-key">Surface</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">Trois-Bassins</div>
+            <div class="part-meta-key">Localisation</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">Active</div>
+            <div class="part-meta-key">Statut</div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- ── ÉCOLE DU MONDE — MADAGASCAR ── -->
+      <div class="part-card">
+        <span class="part-badge">Mécénat · Madagascar</span>
+        <h3 class="part-name">Écoles du Monde</h3>
+        <p class="part-desc">SORIANE soutient l'ONG <strong style="color:var(--or-clair)">Écoles du Monde</strong> à Madagascar en tant que mécène. Campus de Besely (Majunga) : 270 enfants accueillis, de la maternelle au lycée professionnel. Éducation, agriculture durable et reforestation depuis 1997.</p>
+        <div class="part-meta">
+          <div class="part-meta-item">
+            <div class="part-meta-val">Mécène</div>
+            <div class="part-meta-key">Rôle SORIANE</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">Besely</div>
+            <div class="part-meta-key">Campus · Majunga</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">270</div>
+            <div class="part-meta-key">Enfants</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">Actif</div>
+            <div class="part-meta-key">Statut</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PROJET AGRITOURISTIQUE ── -->
+      <div class="part-card">
+        <span class="part-badge">Projet · Agritourisme</span>
+        <h3 class="part-name">Projet Agritouristique</h3>
+        <p class="part-desc">Développement d'un gîte rural + table d'hôtes + résidence principale sur une parcelle agricole de 5 000 m². Statut MSA, micro-BIC, labellisation Gîtes de France en cours d'instruction.</p>
+        <div class="part-meta">
+          <div class="part-meta-item">
+            <div class="part-meta-val">Projet</div>
+            <div class="part-meta-key">Forme</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">5 000 m²</div>
+            <div class="part-meta-key">Parcelle</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">La Réunion</div>
+            <div class="part-meta-key">Territoire</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">2026–27</div>
+            <div class="part-meta-key">Horizon</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── LITHOPEDIA ── -->
+      <div class="part-card">
+        <span class="part-badge">Application mobile · Bien-être</span>
+        <h3 class="part-name">Lithopedia 💎</h3>
+        <p class="part-desc">Encyclopédie mobile de la lithothérapie — toutes les pierres et cristaux au creux de la main. Propriétés, vertus, chakras, purifications, remèdes ciblés. Développée en partenariat avec une lithothérapeute professionnelle. Disponible sur iOS &amp; Android.</p>
+        <div class="part-meta">
+          <div class="part-meta-item">
+            <div class="part-meta-val">App Mobile</div>
+            <div class="part-meta-key">Format</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">iOS &amp; Android</div>
+            <div class="part-meta-key">Plateformes</div>
+          </div>
+          <div class="part-meta-item">
+            <div class="part-meta-val">En production</div>
+            <div class="part-meta-key">Statut</div>
+          </div>
+        </div>
+        <a href="https://www.lithopedia.fr" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:0.5rem; margin-top:1.25rem; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--or); text-decoration:none; border-bottom:1px solid rgba(201,168,76,0.3); padding-bottom:0.15rem;">
+          lithopedia.fr
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+
+      <!-- ── MAYOTTE — GRAND RECTANGLE PLEINE LARGEUR ── -->
+      <div class="part-card mayotte-wide" style="border-color:rgba(201,168,76,0.14); background:linear-gradient(135deg, rgba(22,22,32,0.98) 0%, rgba(28,26,18,0.98) 100%); position:relative; overflow:hidden;">
+        <div style="position:absolute; right:-60px; top:50%; transform:translateY(-50%); width:300px; height:300px; border-radius:50%; background:radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%); pointer-events:none;"></div>
+        <div style="position:absolute; top:0; right:0; background:rgba(201,168,76,0.08); padding:0.3rem 1.1rem; font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(201,168,76,0.65); border-left:1px solid rgba(201,168,76,0.18); border-bottom:1px solid rgba(201,168,76,0.18);">Prochaine expansion</div>
+        <div class="mayotte-inner">
+          <div class="mayotte-left">
+            <span class="part-badge" style="border-color:rgba(201,168,76,0.25); color:rgba(201,168,76,0.65);">Projet d'expansion</span>
+            <h3 class="part-name" style="color:rgba(255,255,255,0.7); font-size:2rem;">Mayotte</h3>
+            <p class="part-desc" style="color:rgba(138,138,154,0.75);">Mayotte est notre prochaine zone d'expansion en défiscalisation immobilière — individuel et collectif (immeuble). Le dispositif Girardin y est applicable, le marché locatif est sous-offrert et la croissance démographique est forte. Vous avez un terrain ou du capital à Mayotte ? Contactez-nous.</p>
+          </div>
+          <div class="part-meta mayotte-meta">
+            <div class="part-meta-item">
+              <div class="part-meta-val" style="color:rgba(201,168,76,0.5); font-size:1.3rem;">En étude</div>
+              <div class="part-meta-key">Phase</div>
+            </div>
+            <div class="part-meta-item">
+              <div class="part-meta-val" style="color:rgba(201,168,76,0.5); font-size:1.3rem;">Immobilier · SCI</div>
+              <div class="part-meta-key">Secteur cible</div>
+            </div>
+            <div class="part-meta-item">
+              <div class="part-meta-val" style="color:rgba(201,168,76,0.5); font-size:1.3rem;">2027+</div>
+              <div class="part-meta-key">Horizon</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    </div>
+  </section>
+
+  <!-- IMPLANTATION -->
+  <section id="implantation">
+    <div class="implantation-inner">
+      <div class="implantation-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+        </svg>
+        Île de La Réunion — 974
+      </div>
+      <h2 class="implantation-title">Enracinée à La Réunion, présente sur trois territoires.</h2>
+      <p class="implantation-text">
+        Ancrée à La Réunion (974), SORIANE maîtrise les dynamiques foncières, juridiques et économiques des territoires insulaires. Cette expertise — PLU, CDPENAF, montages SCI, exploitation locative — est directement transposable à Mayotte (976) et à Madagascar, où SORIANE s'engage également en tant que mécène aux côtés de l'École du Monde.
+      </p>
+      <div style="display:flex; gap:3rem; justify-content:center; flex-wrap:wrap;">
+        <div class="stat-item" style="text-align:center;">
+          <div class="stat-num" style="font-size:2.5rem;">La Réunion</div>
+          <div class="stat-label">Siège social</div>
+        </div>
+        <div class="stat-divider" style="height:60px;"></div>
+        <div class="stat-item" style="text-align:center;">
+          <div class="stat-num" style="font-size:2.5rem;">Mayotte</div>
+          <div class="stat-label">Expansion en cours</div>
+        </div>
+        <div class="stat-divider" style="height:60px;"></div>
+        <div class="stat-item" style="text-align:center;">
+          <div class="stat-num" style="font-size:2.5rem;">Madagascar</div>
+          <div class="stat-label">Partenariat mécénat</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-layout">
+      <div class="contact-left">
+        <p class="section-eyebrow" style="text-align:left; margin-bottom:0.75rem;">Nous contacter</p>
+        <h2>Parlons de votre projet.</h2>
+        <p>SORIANE investit en direct et cherche des co-investisseurs qui partagent sa vision. Vous avez du capital, un terrain ou un projet dans l'Indian Ocean ? Rejoignez-nous sur une opération immobilière défiscalisée, numérique ou locative — nous y mettons aussi le nôtre.</p>
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <span class="contact-info-text">11 Allée de la Palmeraie<br>97460 St-Paul, La Réunion</span>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <span class="contact-info-text"><a href="mailto:contact@soriane.fr" style="color:var(--creme); text-decoration:none;">contact@soriane.fr</a></span>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.08 3.37 2 2 0 0 1 3.05 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91"/>
+              </svg>
+            </div>
+            <span class="contact-info-text"><a href="tel:+262692286028" style="color:var(--creme); text-decoration:none;">06 92 28 60 28</a></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-group">
+          <label>Nom &amp; Prénom</label>
+          <input type="text" placeholder="Jean Dupont" />
+        </div>
+        <div class="form-group">
+          <label>Email professionnel</label>
+          <input type="email" placeholder="jean@entreprise.re" />
+        </div>
+        <div class="form-group">
+          <label>Type de démarche</label>
+          <select>
+            <option value="">Sélectionner...</option>
+            <option>Investissement défiscalisé — j'ai du capital</option>
+            <option>Investissement défiscalisé — j'ai un terrain</option>
+            <option>Projet immobilier Mayotte</option>
+            <option>Participation numérique / logiciel</option>
+            <option>Autre projet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Présentez brièvement votre projet ou votre démarche..."></textarea>
+        </div>
+        <!-- Consentement RGPD -->
+        <div style="display:flex; align-items:flex-start; gap:0.75rem; margin-top:0.5rem;">
+          <input type="checkbox" id="rgpd-consent" style="margin-top:3px; accent-color:var(--or); width:14px; height:14px; flex-shrink:0; cursor:pointer;" required />
+          <label for="rgpd-consent" style="font-size:0.75rem; color:var(--texte-muted); line-height:1.6; cursor:pointer;">
+            J'accepte que SORIANE collecte et traite mes données personnelles aux fins de traitement de ma demande, conformément à la
+            <a href="#mentions" onclick="document.getElementById('mentions-modal').style.display='flex'" style="color:var(--or); text-decoration:underline;">politique de confidentialité</a>
+            et aux
+            <a href="#" onclick="document.getElementById('cgu-modal').style.display='flex'; return false;" style="color:var(--or); text-decoration:underline;">CGU</a>.
+            Mes données ne seront pas transmises à des tiers. *
+          </label>
+        </div>
+
+        <button type="button" class="btn-gold" onclick="
+          const cb = document.getElementById('rgpd-consent');
+          if (!cb.checked) {
+            cb.style.outline = '2px solid rgba(201,168,76,0.8)';
+            setTimeout(()=>cb.style.outline='',2000);
+            return;
+          }
+          this.textContent = 'Message envoyé ✓';
+          this.style.background = 'rgba(201,168,76,0.5)';
+          this.disabled = true;
+        ">Envoyer le message →</button>
+        <p style="font-size:0.68rem; color:rgba(138,138,154,0.5); margin-top:0.25rem;">* Champ obligatoire — droit d'accès, rectification et suppression : contact@soriane.fr</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#080808; border-top:1px solid rgba(201,168,76,0.12); padding:3rem 2rem; display:flex; flex-direction:column; align-items:center; gap:2rem; text-align:center;">
+
+    <!-- Logo centré -->
+    <div>
+      <svg width="130" height="82" viewBox="-8 -6 160 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="51" y1="6" x2="34" y2="6"  stroke="#C9A84C" stroke-width="1.3" opacity="0.82"/>
+        <circle cx="34" cy="6"  r="2.2" fill="#C9A84C" opacity="0.82"/>
+        <line x1="51" y1="6" x2="78" y2="6"  stroke="#C9A84C" stroke-width="1.1" opacity="0.75"/>
+        <circle cx="78" cy="6"  r="2.8" fill="#C9A84C" opacity="0.75"/>
+        <line x1="51" y1="6" x2="37" y2="-1" stroke="#C9A84C" stroke-width="1.2" opacity="0.85"/>
+        <circle cx="37" cy="-1" r="2"   fill="#C9A84C" opacity="0.85"/>
+        <line x1="51" y1="6" x2="62" y2="0"  stroke="#C9A84C" stroke-width="1.0" opacity="0.78"/>
+        <circle cx="62" cy="0"  r="1.7" fill="#C9A84C" opacity="0.78"/>
+        <line x1="51" y1="6" x2="14" y2="4"  stroke="#C9A84C" stroke-width="0.7" opacity="0.40"/>
+        <circle cx="14" cy="4"  r="1.3" fill="#C9A84C" opacity="0.40"/>
+        <line x1="51" y1="6" x2="98" y2="3"  stroke="#C9A84C" stroke-width="0.6" opacity="0.25"/>
+        <circle cx="98" cy="3"  r="1"   fill="#C9A84C" opacity="0.25"/>
+        <line x1="51" y1="6" x2="51" y2="-3" stroke="#C9A84C" stroke-width="0.8" opacity="0.55"/>
+        <circle cx="51" cy="-3" r="1.4" fill="#C9A84C" opacity="0.55"/>
+        <line x1="37" y1="-1" x2="62" y2="0"  stroke="#C9A84C" stroke-width="0.4" opacity="0.13"/>
+        <line x1="34" y1="6"  x2="14" y2="4"  stroke="#C9A84C" stroke-width="0.35" opacity="0.10"/>
+        <circle cx="51" cy="6" r="3.5" fill="#C9A84C"/>
+        <text x="2" y="38" font-family="Inter,sans-serif" font-size="18" font-weight="800" fill="#C9A84C" letter-spacing="3">SORIANE</text>
+        <text x="2" y="54" font-family="Inter,sans-serif" font-size="7" font-weight="300" fill="rgba(201,168,76,0.5)" letter-spacing="3">BE FULLY REALISED</text>
+      </svg>
+    </div>
+
+    <!-- Séparateur -->
+    <div style="width:3rem; height:1px; background:rgba(201,168,76,0.25);"></div>
+
+    <!-- Infos légales -->
+    <div style="font-size:0.75rem; color:var(--texte-muted); line-height:1.9;">
+      SORIANE · Be fully realised · La Réunion · Mayotte · Madagascar<br>
+      SIRET 990 649 725 00019 · APE 7022Z · 11 Allée de la Palmeraie, 97460 St-Paul<br>
+      © 2025 SORIANE — Tous droits réservés &nbsp;·&nbsp;
+      <a href="#mentions" onclick="document.getElementById('mentions-modal').style.display='flex'" style="color:var(--or); text-decoration:none;">Mentions légales</a>
+    </div>
+
+    <!-- Contact -->
+    <div style="font-size:0.8rem; color:var(--texte-muted); line-height:1.7;">
+      Société d'investissement<br>
+      <a href="tel:+262692286028" style="color:var(--texte-muted); text-decoration:none;">06 92 28 60 28</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:contact@soriane.fr" style="color:var(--or); text-decoration:none;">contact@soriane.fr</a>
+    </div>
+
+  </footer>
+
+  <script>
+  // ── DEUX MYRIADES : Participations + Partenaires ──
+  (function() {
+    const OR = (a) => `rgba(201,168,76,${a})`;
+
+    function buildMyriade(canvasId, centerLabel, nodes, crossLinks) {
+      const canvas = document.getElementById(canvasId);
+      if (!canvas) return;
+      const wrap = canvas.parentElement;
+
+      let W, H, cx, cy, t = 0;
+      const CYCLE = 5;
+
+      function resize() {
+        W = wrap.offsetWidth;
+        H = canvas.offsetHeight || 220;
+        canvas.width  = W * devicePixelRatio;
+        canvas.height = H * devicePixelRatio;
+        canvas.style.width  = W + 'px';
+        canvas.style.height = H + 'px';
+        cx = W / 2; cy = H / 2;
+        // Recalc positions
+        const base = Math.min(W, H) * 0.42;
+        nodes.forEach(n => {
+          n.px = cx + Math.cos(n.a) * base * n.d;
+          n.py = cy + Math.sin(n.a) * base * n.d;
+        });
+      }
+
+      function ease(x) { return x < 0.5 ? 2*x*x : 1 - Math.pow(-2*x+2,2)/2; }
+
+      function draw(ts) {
+        const dpr = devicePixelRatio;
+        const ctx = canvas.getContext('2d');
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, W, H);
+        t = (ts * 0.001) % CYCLE;
+
+        // Lignes centre → satellites
+        nodes.forEach((n, i) => {
+          const phase = (i * 0.3) % CYCLE;
+          const raw   = ((t - phase + CYCLE) % CYCLE) / (CYCLE * 0.45);
+          const tri   = raw < 1 ? raw : Math.max(0, 2 - raw);
+          const p     = Math.max(0, Math.min(1, ease(tri)));
+          const px    = cx + (n.px - cx) * p;
+          const py    = cy + (n.py - cy) * p;
+
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.lineTo(px, py);
+          ctx.strokeStyle = OR(n.lo * 0.65);
+          ctx.lineWidth = 1;
+          ctx.setLineDash([5, 4]);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          if (p > 0.05 && p < 0.95) {
+            ctx.beginPath();
+            ctx.arc(px, py, 2, 0, Math.PI*2);
+            ctx.fillStyle = OR(0.9);
+            ctx.fill();
+          }
+        });
+
+        // Cross-links
+        crossLinks.forEach(([a, b], i) => {
+          const na = nodes[a], nb = nodes[b];
+          if (!na || !nb) return;
+          ctx.beginPath();
+          ctx.moveTo(na.px, na.py);
+          ctx.lineTo(nb.px, nb.py);
+          ctx.strokeStyle = OR(0.1);
+          ctx.lineWidth = 0.5;
+          ctx.setLineDash([3, 5]);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        });
+
+        // Nœuds satellites
+        nodes.forEach(n => {
+          ctx.beginPath();
+          ctx.arc(n.px, n.py, n.r, 0, Math.PI*2);
+          ctx.fillStyle = 'rgba(20,20,30,0.97)';
+          ctx.fill();
+          ctx.strokeStyle = OR(n.lo);
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+          ctx.textAlign = 'center';
+          ctx.fillStyle = OR(n.lo);
+          ctx.font = `600 ${n.r > 22 ? 8 : 7}px Inter,sans-serif`;
+          ctx.fillText(n.label, n.px, n.py + (n.sub ? -3 : 3));
+          if (n.sub) {
+            ctx.fillStyle = 'rgba(138,138,154,0.6)';
+            ctx.font = `400 6px Inter,sans-serif`;
+            ctx.fillText(n.sub, n.px, n.py + 7);
+          }
+        });
+
+        // Nœud central
+        const pr = 58;
+        ctx.beginPath();
+        ctx.arc(cx, cy, pr, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(14,14,22,0.97)';
+        ctx.fill();
+        ctx.strokeStyle = OR(1);
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(cx, cy, pr * 0.68, 0, Math.PI*2);
+        ctx.strokeStyle = OR(0.3);
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(cx, cy, pr - 3, 0, Math.PI*2);
+        ctx.clip();
+        ctx.textAlign = 'center';
+        ctx.fillStyle = OR(0.95);
+        ctx.font = `800 ${Math.round(pr * 0.26)}px Inter,sans-serif`;
+        ctx.fillText(centerLabel.line1, cx, cy + Math.round(pr * 0.08));
+        ctx.fillStyle = 'rgba(138,138,154,0.75)';
+        ctx.font = `400 ${Math.round(pr * 0.17)}px Inter,sans-serif`;
+        ctx.fillText(centerLabel.line2, cx, cy + Math.round(pr * 0.32));
+        ctx.restore();
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+      requestAnimationFrame(draw);
+    }
+
+    // ── Myriade hero : types de projets éligibles SORIANE ──
+    buildMyriade('myriadeProjects',
+      { line1: 'SORIANE', line2: 'INVEST.' },
+      [
+        { a: Math.PI,        d: 0.70, r: 26, lo: 0.88, label: 'SCI',      sub: 'IMMOBILIER'   },
+        { a: Math.PI*1.28,   d: 0.72, r: 24, lo: 0.82, label: 'SAAS',     sub: 'LOGICIEL'    },
+        { a: Math.PI*0.72,   d: 0.72, r: 24, lo: 0.82, label: 'ESN',      sub: 'NUMÉRIQUE'    },
+        { a: Math.PI*1.65,   d: 0.68, r: 22, lo: 0.75, label: 'APP',      sub: 'MOBILE'       },
+        { a: Math.PI*0.35,   d: 0.68, r: 22, lo: 0.75, label: 'RÉUNION',  sub: null                },
+        { a: 0,              d: 0.65, r: 20, lo: 0.70, label: 'MAYOTTE',  sub: null                },
+        { a: Math.PI*1.5,    d: 0.60, r: 20, lo: 0.68, label: 'MADA',     sub: null               },
+        { a: Math.PI*1.15,   d: 0.82, r: 18, lo: 0.48, label: 'AUTRES',   sub: 'PROJETS'    },
+        { a: Math.PI*0.05,   d: 0.68, r: 70, lo: 0.92, label: '?',        sub: 'VOUS ?',    prospect: true },
+      ],
+      [[0,1],[1,2],[2,3],[3,6],[4,5],[5,0],[0,7]]
+    );
+
+    // ── Myriade 2 : Partenaires ──
+    buildMyriade('myriadePartners',
+      { line1: 'RÉSEAU', line2: 'EXPERTS' },
+      [
+        { a: Math.PI*1.5,    d: 0.70, r: 26, lo: 0.90, label: 'NOTAIRE',     sub: null         },
+        { a: Math.PI*1.78,   d: 0.72, r: 25, lo: 0.85, label: 'FISCALISTE',  sub: 'FISCAL'       },
+        { a: Math.PI*1.22,   d: 0.72, r: 25, lo: 0.85, label: 'EXPERT',      sub: 'COMPTABLE'  },
+        { a: Math.PI*0.5,    d: 0.68, r: 24, lo: 0.80, label: 'BANQUE',      sub: 'PARTENAIRE' },
+        { a: Math.PI*0.22,   d: 0.70, r: 22, lo: 0.75, label: 'AGENT',       sub: 'FONCIER'    },
+        { a: Math.PI*0.78,   d: 0.68, r: 22, lo: 0.75, label: 'NOTAIRE',     sub: 'MAYOTTE'    },
+        { a: Math.PI,        d: 0.65, r: 20, lo: 0.70, label: 'ARCHITECTE',  sub: null         },
+        { a: Math.PI*1.35,   d: 0.80, r: 18, lo: 0.55, label: "BUR. D'ÉT.",  sub: null         },
+        { a: Math.PI*0.65,   d: 0.82, r: 16, lo: 0.45, label: 'CONSTRUCTEUR',sub: null         },
+      ],
+      [[0,1],[1,2],[2,6],[3,4],[4,5],[5,3],[6,7]]
+    );
+
+  })();
+  </script>
+  <script>
+  // ── ANIMATION CANVAS HERO ──
+  (function() {
+    const canvas = document.getElementById('heroCanvas');
+    if (!canvas) return;
+    const wrap = canvas.parentElement;
+    const OR_RGBA = (a) => `rgba(201,168,76,${a})`;
+    let W, H, cx, cy, mouse = { x: -999, y: -999 }, t = 0;
+    let nodes = [], lines = [];
+    const CYCLE = 4.5;
+
+    // Types de projets éligibles gravitant autour de SORIANE
+    const DEFS = [
+      { a: Math.PI,           d: 0.80, r: 46, label: 'SCI',      sub: 'IMMOBILIER',  lo: 0.92 },
+      { a: Math.PI*1.32,      d: 0.82, r: 44, label: 'SAAS',     sub: 'LOGICIEL',    lo: 0.86 },
+      { a: Math.PI*0.80,      d: 0.82, r: 44, label: 'ESN',      sub: 'NUMÉRIQUE',   lo: 0.86 },
+      { a: Math.PI*1.68,      d: 0.84, r: 42, label: 'APP',      sub: 'MOBILE',      lo: 0.80 },
+      { a: Math.PI*0.30,      d: 0.84, r: 42, label: 'RÉUNION',  sub: null,          lo: 0.76 },
+      { a: 0,                 d: 0.78, r: 40, label: 'MAYOTTE',   sub: null,          lo: 0.70 },
+      { a: Math.PI*1.5,       d: 0.76, r: 38, label: 'MADA',     sub: null,          lo: 0.64 },
+      { a: Math.PI*1.15,      d: 0.90, r: 32, label: 'AUTRES',   sub: 'PROJETS',     lo: 0.50 },
+      { a: Math.PI*0.48,      d: 0.68, r: 70, label: '?',        sub: 'VOUS ?',      lo: 0.92, prospect: true },
+    ];
+
+    function resize() {
+      W = wrap.offsetWidth;
+      H = wrap.offsetHeight;
+      canvas.width  = W * devicePixelRatio;
+      canvas.height = H * devicePixelRatio;
+      canvas.style.width  = W + 'px';
+      canvas.style.height = H + 'px';
+      cx = W / 2; cy = H / 2;
+      buildNodes();
+    }
+
+    function buildNodes() {
+      const maxNodeR = Math.max(...DEFS.map(d => d.r));
+      const maxDist  = Math.max(...DEFS.map(d => d.d));
+      const avail    = H / 2 - maxNodeR - 12;
+      const base     = avail / maxDist;
+      nodes = [{ x: cx, y: cy, r: 46, label: 'SORIANE', sub: 'INVEST.', main: true }];
+      DEFS.forEach(d => {
+        nodes.push({
+          x: cx + Math.cos(d.a) * base * d.d,
+          y: cy + Math.sin(d.a) * base * d.d,
+          r: d.r, label: d.label, sub: d.sub,
+          main: false, lo: d.lo, prospect: d.prospect || false
+        });
+      });
+      lines = [];
+      nodes.slice(1).forEach((_, i) => lines.push({ from: 0, to: i + 1 }));
+      [[1,2],[2,3],[3,7],[4,5],[5,6],[6,1]].forEach(([a,b]) => {
+        if (nodes[a] && nodes[b]) lines.push({ from: a, to: b, cross: true });
+      });
+    }
+
+    function ease(x) { return x < 0.5 ? 2*x*x : 1 - Math.pow(-2*x+2,2)/2; }
+
+    function draw(ts) {
+      const dpr = devicePixelRatio;
+      const ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      t = (ts * 0.001) % CYCLE;
+
+      // Lignes triangle wave boucle infinie
+      lines.forEach((l, li) => {
+        const fromN = nodes[l.from], toN = nodes[l.to];
+        const phase    = (li * 0.25) % CYCLE;
+        const raw      = ((t - phase + CYCLE) % CYCLE) / (CYCLE * 0.45);
+        const tri      = raw < 1 ? raw : Math.max(0, 2 - raw);
+        const progress = Math.max(0, Math.min(1, ease(tri)));
+        const px = fromN.x + (toN.x - fromN.x) * progress;
+        const py = fromN.y + (toN.y - fromN.y) * progress;
+        const lw = l.cross ? 0.5 : Math.max(0.5, (toN.lo || 0.5) * 1.8);
+        const alpha = l.cross ? 0.12 : (toN.lo || 0.5);
+        ctx.beginPath();
+        ctx.moveTo(fromN.x, fromN.y);
+        ctx.lineTo(px, py);
+        ctx.strokeStyle = OR_RGBA(alpha * 0.72);
+        ctx.lineWidth = lw;
+        ctx.setLineDash(l.cross ? [3,5] : [6,4]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        if (progress > 0.05 && progress < 0.95) {
+          ctx.beginPath();
+          ctx.arc(px, py, l.cross ? 1.5 : lw * 1.8, 0, Math.PI*2);
+          ctx.fillStyle = OR_RGBA(0.92);
+          ctx.fill();
+        }
+      });
+
+      // Nœuds
+      nodes.forEach(n => {
+        const dx = mouse.x - n.x, dy = mouse.y - n.y;
+        const hover = Math.sqrt(dx*dx+dy*dy) < 55 && !n.main;
+        const rr = n.r * (hover ? 1.12 : 1);
+
+        // Fond + bordure avec clip
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, rr, 0, Math.PI*2);
+        ctx.fillStyle = n.main ? 'rgba(12,12,20,0.98)' : n.prospect ? 'rgba(14,14,22,0.55)' : 'rgba(22,22,32,0.95)';
+        ctx.fill();
+        if (n.prospect) {
+          ctx.setLineDash([7, 5]);
+          ctx.strokeStyle = OR_RGBA(0.75);
+          ctx.lineWidth = 2;
+        } else {
+          ctx.setLineDash([]);
+          ctx.strokeStyle = OR_RGBA(n.main ? 1 : hover ? 0.9 : (n.lo || 0.6));
+          ctx.lineWidth = n.main ? 2.5 : 1.5;
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Arc tournant style "réseau" sur la bulle prospect
+        if (n.prospect) {
+          const t2 = ts * 0.001;
+          // Anneau complet tournant (même style que le nœud central réseau)
+          ctx.save();
+          ctx.translate(n.x, n.y);
+          ctx.rotate(t2 * 0.6);
+          ctx.beginPath();
+          ctx.arc(0, 0, rr + 10, 0, Math.PI * 2);
+          ctx.strokeStyle = OR_RGBA(0.4);
+          ctx.lineWidth = 1.5;
+          ctx.setLineDash([10, 6]);
+          ctx.stroke();
+          ctx.restore();
+          // Second anneau contra-rotatif
+          ctx.save();
+          ctx.translate(n.x, n.y);
+          ctx.rotate(-t2 * 0.3);
+          ctx.beginPath();
+          ctx.arc(0, 0, rr + 22, 0, Math.PI * 2);
+          ctx.strokeStyle = OR_RGBA(0.18);
+          ctx.lineWidth = 1;
+          ctx.setLineDash([6, 10]);
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        // Anneau interne nœud central
+        if (n.main) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, rr * 0.68, 0, Math.PI*2);
+          ctx.strokeStyle = OR_RGBA(0.25);
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+
+        // Texte clippé dans la bulle
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, rr - 3, 0, Math.PI*2);
+        ctx.clip();
+        ctx.textAlign = 'center';
+        const labelAlpha = n.main ? 0.95 : hover ? 1 : (n.lo || 0.7);
+
+        if (n.prospect) {
+          ctx.fillStyle = OR_RGBA(0.88);
+          ctx.font = `200 ${Math.round(rr * 1.1)}px Inter,sans-serif`;
+          ctx.fillText('?', n.x, n.y + rr * 0.36);
+          ctx.fillStyle = OR_RGBA(0.60);
+          ctx.font = `600 ${Math.round(rr * 0.22)}px Inter,sans-serif`;
+          ctx.fillText('VOUS ?', n.x, n.y + rr * 0.72);
+        } else if (n.main) {
+          ctx.fillStyle = OR_RGBA(0.95);
+          ctx.font = `800 ${Math.round(rr * 0.26)}px Inter,sans-serif`;
+          ctx.fillText(n.label, n.x, n.y + Math.round(rr * 0.08));
+          ctx.fillStyle = 'rgba(138,138,154,0.75)';
+          ctx.font = `400 ${Math.round(rr * 0.17)}px Inter,sans-serif`;
+          ctx.fillText(n.sub, n.x, n.y + Math.round(rr * 0.30));
+        } else {
+          ctx.fillStyle = OR_RGBA(labelAlpha);
+          const fs = Math.max(8, Math.round(rr * 0.30));
+          ctx.font = `700 ${fs}px Inter,sans-serif`;
+          ctx.fillText(n.label, n.x, n.y + (n.sub ? -rr*0.10 : rr*0.12));
+          if (n.sub) {
+            ctx.fillStyle = `rgba(138,138,154,0.65)`;
+            ctx.font = `400 ${Math.max(7, Math.round(rr * 0.20))}px Inter,sans-serif`;
+            ctx.fillText(n.sub, n.x, n.y + rr * 0.28);
+          }
+        }
+        ctx.restore();
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    wrap.addEventListener('mousemove', e => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    wrap.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; });
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(draw);
+  })();
+  </script>
+
+  <script>
+  // ── TOUCH / SCROLL REVEAL sur les cartes ──
+  (function() {
+    const cards = document.querySelectorAll('.part-card');
+
+    // Touch : classe "touched" temporaire
+    cards.forEach(card => {
+      card.addEventListener('touchstart', () => {
+        card.classList.add('touched');
+      }, { passive: true });
+      card.addEventListener('touchend', () => {
+        setTimeout(() => card.classList.remove('touched'), 600);
+      }, { passive: true });
+    });
+
+    // IntersectionObserver : fade-in au scroll (mobile & desktop)
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = entry.target.classList.contains('mayotte-wide')
+              ? 'none'
+              : 'translateY(0)';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      cards.forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(24px)';
+        card.style.transition += `, opacity 0.6s ease ${i * 0.07}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 0.07}s`;
+        observer.observe(card);
+      });
+    }
+  })();
+  </script>
+
+  <!-- BANNER COOKIE RGPD -->
+  <div id="cookie-banner" style="position:fixed; bottom:0; left:0; right:0; z-index:998; background:rgba(14,14,22,0.97); border-top:1px solid rgba(201,168,76,0.2); padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap;">
+    <p style="font-size:0.78rem; color:var(--texte-muted); line-height:1.6; margin:0; max-width:700px;">
+      Ce site ne dépose aucun cookie de traçage. Les données saisies dans le formulaire de contact sont utilisées uniquement pour répondre à votre demande, conformément au <strong style="color:var(--creme);">RGPD</strong> et à notre
+      <a href="#mentions" onclick="document.getElementById('mentions-modal').style.display='flex'" style="color:var(--or); text-decoration:underline;">politique de confidentialité</a>.
+    </p>
+    <button onclick="document.getElementById('cookie-banner').style.display='none'; localStorage.setItem('cookieConsent','1')" style="background:var(--or); color:var(--noir); font-family:'Inter',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.6rem 1.5rem; border:none; border-radius:2px; cursor:pointer; white-space:nowrap; flex-shrink:0;">J'ai compris</button>
+  </div>
+  <script>if (localStorage.getItem('cookieConsent') === '1') { document.getElementById('cookie-banner').style.display = 'none'; }</script>
+
+  <!-- MODAL CGU -->
+  <div id="cgu-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999; align-items:center; justify-content:center; padding:2rem;">
+    <div style="background:var(--ardoise); border:1px solid rgba(201,168,76,0.2); border-radius:2px; max-width:700px; width:100%; max-height:85vh; overflow-y:auto; padding:3rem; position:relative;">
+      <button onclick="document.getElementById('cgu-modal').style.display='none'" style="position:absolute; top:1.25rem; right:1.25rem; background:none; border:none; color:var(--texte-muted); font-size:1.5rem; cursor:pointer;">×</button>
+      <p style="font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--or); margin-bottom:1.5rem;">CGU</p>
+      <h2 style="font-family:'Playfair Display',serif; font-size:1.75rem; color:var(--blanc); margin-bottom:2rem;">Conditions d'utilisation</h2>
+      <div style="display:flex; flex-direction:column; gap:1.75rem;">
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Objet</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Le présent site est édité par SORIANE à titre informatif. Il ne constitue pas une offre de services financiers ni un conseil en investissement au sens AMF.</p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Données personnelles (RGPD)</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Les données collectées via le formulaire sont utilisées exclusivement pour répondre à votre demande. Conservation 3 ans max. Droit d'accès/rectification/suppression : <a href="mailto:contact@soriane.fr" style="color:var(--or);">contact@soriane.fr</a>. Aucune donnée transmise à des tiers.</p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Cookies</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Aucun cookie publicitaire ni de traçage. Un localStorage mémorise uniquement votre acceptation de la présente notice.</p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Droit applicable</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Droit français. Tribunal du ressort de St-Denis de La Réunion.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL MENTIONS LÉGALES -->
+  <div id="mentions-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999; align-items:center; justify-content:center; padding:2rem;">
+    <div style="background:var(--ardoise); border:1px solid rgba(201,168,76,0.2); border-radius:2px; max-width:700px; width:100%; max-height:85vh; overflow-y:auto; padding:3rem; position:relative;">
+      <button onclick="document.getElementById('mentions-modal').style.display='none'" style="position:absolute; top:1.25rem; right:1.25rem; background:none; border:none; color:var(--texte-muted); font-size:1.5rem; cursor:pointer;">×</button>
+      <p style="font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--or); margin-bottom:1.5rem;">Mentions légales</p>
+      <h2 style="font-family:'Playfair Display',serif; font-size:1.75rem; color:var(--blanc); margin-bottom:2rem;">Informations légales</h2>
+      <div style="display:flex; flex-direction:column; gap:2rem;">
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Éditeur du site</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;"><strong style="color:var(--creme);">SORIANE</strong> — <em>Be fully realised</em><br>Société par Actions Simplifiée<br>11 Allée de la Palmeraie, 97460 St-Paul, La Réunion<br>SIRET : 990 649 725 00019 · APE 7022Z<br>Téléphone : <a href="tel:+262692286028" style="color:var(--creme); text-decoration:none;">06 92 28 60 28</a></p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Responsable de la publication</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Le Président de SORIANE · <a href="tel:+262692286028" style="color:var(--creme); text-decoration:none;">06 92 28 60 28</a></p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Hébergement</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;"><em>[à compléter selon hébergeur retenu]</em></p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Propriété intellectuelle</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">L'ensemble des contenus est la propriété exclusive de SORIANE. Toute reproduction sans accord écrit est interdite.</p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Données personnelles</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Conformément au RGPD (UE 2016/679), vous disposez d'un droit d'accès, rectification et suppression : <a href="mailto:contact@soriane.fr" style="color:var(--or);">contact@soriane.fr</a>. Aucune donnée transmise à des tiers.</p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Droit applicable</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Droit français. Tribunaux du ressort de St-Denis de La Réunion.</p></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>  <script>
+  // ── MYRIADE PARTENAIRES ──
+  (function() {
+    const OR = (a) => `rgba(201,168,76,${a})`;
+    const canvas = document.getElementById('myriadePartners');
+    if (!canvas) return;
+    const wrap = canvas.parentElement;
+    let W, H, cx, cy, t = 0;
+    const CYCLE = 5.5;
+
+    const DEFS = [
+      { a: Math.PI * 0.00, d: 0.58, r: 62, lo: 0.95, label: 'NOTAIRE',          sub: null },
+      { a: Math.PI * 0.29, d: 0.58, r: 66, lo: 0.92, label: 'FISCALISTE',       sub: null },
+      { a: Math.PI * 0.57, d: 0.58, r: 78, lo: 0.90, label: 'CONSTRUCTEUR',     sub: null },
+      { a: Math.PI * 0.86, d: 0.58, r: 64, lo: 0.88, label: 'ARCHITECTE',       sub: null },
+      { a: Math.PI * 1.14, d: 0.58, r: 72, lo: 0.88, label: 'EXPERT', sub: 'COMPTABLE', twoLines: true },
+      { a: Math.PI * 1.43, d: 0.58, r: 62, lo: 0.85, label: 'BANQUE',           sub: null },
+      { a: Math.PI * 1.71, d: 0.58, r: 70, lo: 0.85, label: 'AGENT', sub: 'FONCIER', twoLines: true },
+    ];
+
+    function resize() {
+      W = wrap.offsetWidth;
+      // Calculer H depuis le ratio 16/9 appliqué au CSS
+      H = Math.round(W * 3 / 4);
+      canvas.width  = W * devicePixelRatio;
+      canvas.height = H * devicePixelRatio;
+      canvas.style.width  = W + 'px';
+      canvas.style.height = H + 'px';
+      cx = W / 2; cy = H / 2;
+      // Base dynamique depuis H (axe limitant vertical)
+      const maxR = Math.max(...DEFS.map(d => d.r));
+      const maxD = Math.max(...DEFS.map(d => d.d));
+      const avail = H / 2 - maxR - 14;
+      const base  = avail / maxD;
+      DEFS.forEach(d => {
+        d.px = cx + Math.cos(d.a) * base * d.d;
+        d.py = cy + Math.sin(d.a) * base * d.d;
+      });
+    }
+
+    function ease(x) { return x < 0.5 ? 2*x*x : 1 - Math.pow(-2*x+2,2)/2; }
+
+    function draw(ts) {
+      const dpr = devicePixelRatio;
+      const ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      t = (ts * 0.001) % CYCLE;
+
+      // Lignes animées triangle wave
+      DEFS.forEach((n, i) => {
+        const phase = (i * 0.30) % CYCLE;
+        const raw   = ((t - phase + CYCLE) % CYCLE) / (CYCLE * 0.45);
+        const tri   = raw < 1 ? raw : Math.max(0, 2 - raw);
+        const p     = Math.max(0, Math.min(1, ease(tri)));
+        const px    = cx + (n.px - cx) * p;
+        const py    = cy + (n.py - cy) * p;
+        const lw    = Math.max(0.8, n.lo * 2.2);
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(px, py);
+        ctx.strokeStyle = OR(n.lo * 0.65);
+        ctx.lineWidth = lw;
+        ctx.setLineDash([6, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        if (p > 0.05 && p < 0.95) {
+          ctx.beginPath();
+          ctx.arc(px, py, lw * 1.6, 0, Math.PI*2);
+          ctx.fillStyle = OR(0.92);
+          ctx.fill();
+        }
+      });
+
+      // Cross-links
+      [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,0]].forEach(([a,b]) => {
+        const na = DEFS[a], nb = DEFS[b];
+        if (!na || !nb) return;
+        ctx.beginPath();
+        ctx.moveTo(na.px, na.py);
+        ctx.lineTo(nb.px, nb.py);
+        ctx.strokeStyle = OR(0.08);
+        ctx.lineWidth = 0.6;
+        ctx.setLineDash([3, 6]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      });
+
+      // Nœuds satellites
+      DEFS.forEach(n => {
+        ctx.beginPath();
+        ctx.arc(n.px, n.py, n.r, 0, Math.PI*2);
+        ctx.fillStyle = n.prospect ? 'rgba(14,14,22,0.55)' : 'rgba(18,18,28,0.97)';
+        ctx.fill();
+                // Style bulle prospect vs expert
+        if (n.prospect) {
+          ctx.setLineDash([7, 5]);
+          ctx.strokeStyle = OR(0.75);
+          ctx.lineWidth = 2.5;
+        } else {
+          ctx.setLineDash([]);
+          ctx.strokeStyle = OR(n.lo);
+          ctx.lineWidth = 2;
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(n.px, n.py, n.r - 3, 0, Math.PI*2);
+        ctx.clip();
+        ctx.textAlign = 'center';
+
+        if (n.prospect) {
+          // Grand ? animé — pulse via sin(ts)
+          ctx.fillStyle = OR(0.85 + 0.1 * Math.sin(ts * 0.003));
+          ctx.font = `200 ${Math.round(n.r * 1.05)}px Inter,sans-serif`;
+          ctx.fillText('?', n.px, n.py + n.r * 0.36);
+          ctx.fillStyle = OR(0.60);
+          ctx.font = `600 ${Math.round(n.r * 0.22)}px Inter,sans-serif`;
+          ctx.fillText(n.sub, n.px, n.py + n.r * 0.72);
+        } else {
+          ctx.fillStyle = OR(n.lo);
+          const fsRatio = n.label.length > 8 ? 0.19 : 0.28;
+          const fs = Math.max(10, Math.round(n.r * fsRatio));
+          ctx.font = `700 ${fs}px Inter,sans-serif`;
+          if (n.twoLines && n.sub) {
+            ctx.fillText(n.label, n.px, n.py - n.r * 0.08);
+            ctx.fillText(n.sub,   n.px, n.py + n.r * 0.22);
+          } else {
+            ctx.fillText(n.label, n.px, n.py + n.r * 0.10);
+          }
+        }
+        ctx.restore();
+      });
+
+      // Nœud central RÉSEAU
+      const pr = 58;
+      ctx.beginPath();
+      ctx.arc(cx, cy, pr, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(12,12,20,0.98)';
+      ctx.fill();
+      ctx.strokeStyle = OR(1);
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(cx, cy, pr * 0.68, 0, Math.PI*2);
+      ctx.strokeStyle = OR(0.25);
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, pr - 4, 0, Math.PI*2);
+      ctx.clip();
+      ctx.textAlign = 'center';
+      ctx.fillStyle = OR(0.96);
+      ctx.font = `800 ${Math.round(pr * 0.28)}px Inter,sans-serif`;
+      ctx.fillText('RÉSEAU', cx, cy + Math.round(pr * 0.06));
+      ctx.fillStyle = 'rgba(138,138,154,0.75)';
+      ctx.font = `400 ${Math.round(pr * 0.18)}px Inter,sans-serif`;
+      ctx.fillText('SORIANE', cx, cy + Math.round(pr * 0.30));
+      ctx.restore();
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => { resize(); });
+    // Délai pour laisser le DOM calculer le layout
+    setTimeout(() => { resize(); requestAnimationFrame(draw); }, 100);
+  })();
+  </script>html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SORIANE — Be fully realised</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  
+
+  <script>
+  // ── DEUX MYRIADES : Participations + Partenaires ──
+  (function() {
+    const OR = (a) => `rgba(201,168,76,${a})`;
+
+    function buildMyriade(canvasId, centerLabel, nodes, crossLinks) {
+      const canvas = document.getElementById(canvasId);
+      if (!canvas) return;
+      const wrap = canvas.parentElement;
+
+      let W, H, cx, cy, t = 0;
+      const CYCLE = 5;
+
+      function resize() {
+        W = wrap.offsetWidth;
+        H = canvas.offsetHeight || 220;
+        canvas.width  = W * devicePixelRatio;
+        canvas.height = H * devicePixelRatio;
+        canvas.style.width  = W + 'px';
+        canvas.style.height = H + 'px';
+        cx = W / 2; cy = H / 2;
+        // Recalc positions
+        const base = Math.min(W, H) * 0.42;
+        nodes.forEach(n => {
+          n.px = cx + Math.cos(n.a) * base * n.d;
+          n.py = cy + Math.sin(n.a) * base * n.d;
+        });
+      }
+
+      function ease(x) { return x < 0.5 ? 2*x*x : 1 - Math.pow(-2*x+2,2)/2; }
+
+      function draw(ts) {
+        const dpr = devicePixelRatio;
+        const ctx = canvas.getContext('2d');
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, W, H);
+        t = (ts * 0.001) % CYCLE;
+
+        // Lignes centre → satellites
+        nodes.forEach((n, i) => {
+          const phase = (i * 0.3) % CYCLE;
+          const raw   = ((t - phase + CYCLE) % CYCLE) / (CYCLE * 0.45);
+          const tri   = raw < 1 ? raw : Math.max(0, 2 - raw);
+          const p     = Math.max(0, Math.min(1, ease(tri)));
+          const px    = cx + (n.px - cx) * p;
+          const py    = cy + (n.py - cy) * p;
+
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.lineTo(px, py);
+          ctx.strokeStyle = OR(n.lo * 0.65);
+          ctx.lineWidth = 1;
+          ctx.setLineDash([5, 4]);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          if (p > 0.05 && p < 0.95) {
+            ctx.beginPath();
+            ctx.arc(px, py, 2, 0, Math.PI*2);
+            ctx.fillStyle = OR(0.9);
+            ctx.fill();
+          }
+        });
+
+        // Cross-links
+        crossLinks.forEach(([a, b], i) => {
+          const na = nodes[a], nb = nodes[b];
+          if (!na || !nb) return;
+          ctx.beginPath();
+          ctx.moveTo(na.px, na.py);
+          ctx.lineTo(nb.px, nb.py);
+          ctx.strokeStyle = OR(0.1);
+          ctx.lineWidth = 0.5;
+          ctx.setLineDash([3, 5]);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        });
+
+        // Nœuds satellites
+        nodes.forEach(n => {
+          ctx.beginPath();
+          ctx.arc(n.px, n.py, n.r, 0, Math.PI*2);
+          ctx.fillStyle = 'rgba(20,20,30,0.97)';
+          ctx.fill();
+          ctx.strokeStyle = OR(n.lo);
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+          ctx.textAlign = 'center';
+          ctx.fillStyle = OR(n.lo);
+          ctx.font = `600 ${n.r > 22 ? 8 : 7}px Inter,sans-serif`;
+          ctx.fillText(n.label, n.px, n.py + (n.sub ? -3 : 3));
+          if (n.sub) {
+            ctx.fillStyle = 'rgba(138,138,154,0.6)';
+            ctx.font = `400 6px Inter,sans-serif`;
+            ctx.fillText(n.sub, n.px, n.py + 7);
+          }
+        });
+
+        // Nœud central
+        const pr = 58;
+        ctx.beginPath();
+        ctx.arc(cx, cy, pr, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(14,14,22,0.97)';
+        ctx.fill();
+        ctx.strokeStyle = OR(1);
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(cx, cy, pr * 0.68, 0, Math.PI*2);
+        ctx.strokeStyle = OR(0.3);
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(cx, cy, pr - 3, 0, Math.PI*2);
+        ctx.clip();
+        ctx.textAlign = 'center';
+        ctx.fillStyle = OR(0.95);
+        ctx.font = `800 ${Math.round(pr * 0.26)}px Inter,sans-serif`;
+        ctx.fillText(centerLabel.line1, cx, cy + Math.round(pr * 0.08));
+        ctx.fillStyle = 'rgba(138,138,154,0.75)';
+        ctx.font = `400 ${Math.round(pr * 0.17)}px Inter,sans-serif`;
+        ctx.fillText(centerLabel.line2, cx, cy + Math.round(pr * 0.32));
+        ctx.restore();
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+      requestAnimationFrame(draw);
+    }
+
+    // ── Myriade hero : types de projets éligibles SORIANE ──
+    buildMyriade('myriadeProjects',
+      { line1: 'SORIANE', line2: 'INVEST.' },
+      [
+        { a: Math.PI,        d: 0.70, r: 26, lo: 0.88, label: 'SCI',      sub: 'IMMOBILIER'   },
+        { a: Math.PI*1.28,   d: 0.72, r: 24, lo: 0.82, label: 'SAAS',     sub: 'LOGICIEL'    },
+        { a: Math.PI*0.72,   d: 0.72, r: 24, lo: 0.82, label: 'ESN',      sub: 'NUMÉRIQUE'    },
+        { a: Math.PI*1.65,   d: 0.68, r: 22, lo: 0.75, label: 'APP',      sub: 'MOBILE'       },
+        { a: Math.PI*0.35,   d: 0.68, r: 22, lo: 0.75, label: 'RÉUNION',  sub: null                },
+        { a: 0,              d: 0.65, r: 20, lo: 0.70, label: 'MAYOTTE',  sub: null                },
+        { a: Math.PI*1.5,    d: 0.60, r: 20, lo: 0.68, label: 'MADA',     sub: null               },
+        { a: Math.PI*1.15,   d: 0.82, r: 18, lo: 0.48, label: 'AUTRES',   sub: 'PROJETS'    },
+        { a: Math.PI*0.05,   d: 0.68, r: 70, lo: 0.92, label: '?',        sub: 'VOUS ?',    prospect: true },
+      ],
+      [[0,1],[1,2],[2,3],[3,6],[4,5],[5,0],[0,7]]
+    );
+
+    // ── Myriade 2 : Partenaires ──
+    buildMyriade('myriadePartners',
+      { line1: 'RÉSEAU', line2: 'EXPERTS' },
+      [
+        { a: Math.PI*1.5,    d: 0.70, r: 26, lo: 0.90, label: 'NOTAIRE',     sub: null         },
+        { a: Math.PI*1.78,   d: 0.72, r: 25, lo: 0.85, label: 'FISCALISTE',  sub: 'FISCAL'       },
+        { a: Math.PI*1.22,   d: 0.72, r: 25, lo: 0.85, label: 'EXPERT',      sub: 'COMPTABLE'  },
+        { a: Math.PI*0.5,    d: 0.68, r: 24, lo: 0.80, label: 'BANQUE',      sub: 'PARTENAIRE' },
+        { a: Math.PI*0.22,   d: 0.70, r: 22, lo: 0.75, label: 'AGENT',       sub: 'FONCIER'    },
+        { a: Math.PI*0.78,   d: 0.68, r: 22, lo: 0.75, label: 'NOTAIRE',     sub: 'MAYOTTE'    },
+        { a: Math.PI,        d: 0.65, r: 20, lo: 0.70, label: 'ARCHITECTE',  sub: null         },
+        { a: Math.PI*1.35,   d: 0.80, r: 18, lo: 0.55, label: "BUR. D'ÉT.",  sub: null         },
+        { a: Math.PI*0.65,   d: 0.82, r: 16, lo: 0.45, label: 'CONSTRUCTEUR',sub: null         },
+      ],
+      [[0,1],[1,2],[2,6],[3,4],[4,5],[5,3],[6,7]]
+    );
+
+  })();
+  </script>
+  <script>
+  // ── ANIMATION CANVAS HERO ──
+  (function() {
+    const canvas = document.getElementById('heroCanvas');
+    if (!canvas) return;
+    const wrap = canvas.parentElement;
+    const OR_RGBA = (a) => `rgba(201,168,76,${a})`;
+    let W, H, cx, cy, mouse = { x: -999, y: -999 }, t = 0;
+    let nodes = [], lines = [];
+    const CYCLE = 4.5;
+
+    // Types de projets éligibles gravitant autour de SORIANE
+    const DEFS = [
+      { a: Math.PI,           d: 0.80, r: 46, label: 'SCI',      sub: 'IMMOBILIER',  lo: 0.92 },
+      { a: Math.PI*1.32,      d: 0.82, r: 44, label: 'SAAS',     sub: 'LOGICIEL',    lo: 0.86 },
+      { a: Math.PI*0.80,      d: 0.82, r: 44, label: 'ESN',      sub: 'NUMÉRIQUE',   lo: 0.86 },
+      { a: Math.PI*1.68,      d: 0.84, r: 42, label: 'APP',      sub: 'MOBILE',      lo: 0.80 },
+      { a: Math.PI*0.30,      d: 0.84, r: 42, label: 'RÉUNION',  sub: null,          lo: 0.76 },
+      { a: 0,                 d: 0.78, r: 40, label: 'MAYOTTE',   sub: null,          lo: 0.70 },
+      { a: Math.PI*1.5,       d: 0.76, r: 38, label: 'MADA',     sub: null,          lo: 0.64 },
+      { a: Math.PI*1.15,      d: 0.90, r: 32, label: 'AUTRES',   sub: 'PROJETS',     lo: 0.50 },
+      { a: Math.PI*0.48,      d: 0.68, r: 70, label: '?',        sub: 'VOUS ?',      lo: 0.92, prospect: true },
+    ];
+
+    function resize() {
+      W = wrap.offsetWidth;
+      H = wrap.offsetHeight;
+      canvas.width  = W * devicePixelRatio;
+      canvas.height = H * devicePixelRatio;
+      canvas.style.width  = W + 'px';
+      canvas.style.height = H + 'px';
+      cx = W / 2; cy = H / 2;
+      buildNodes();
+    }
+
+    function buildNodes() {
+      const maxNodeR = Math.max(...DEFS.map(d => d.r));
+      const maxDist  = Math.max(...DEFS.map(d => d.d));
+      const avail    = H / 2 - maxNodeR - 12;
+      const base     = avail / maxDist;
+      nodes = [{ x: cx, y: cy, r: 46, label: 'SORIANE', sub: 'INVEST.', main: true }];
+      DEFS.forEach(d => {
+        nodes.push({
+          x: cx + Math.cos(d.a) * base * d.d,
+          y: cy + Math.sin(d.a) * base * d.d,
+          r: d.r, label: d.label, sub: d.sub,
+          main: false, lo: d.lo, prospect: d.prospect || false
+        });
+      });
+      lines = [];
+      nodes.slice(1).forEach((_, i) => lines.push({ from: 0, to: i + 1 }));
+      [[1,2],[2,3],[3,7],[4,5],[5,6],[6,1]].forEach(([a,b]) => {
+        if (nodes[a] && nodes[b]) lines.push({ from: a, to: b, cross: true });
+      });
+    }
+
+    function ease(x) { return x < 0.5 ? 2*x*x : 1 - Math.pow(-2*x+2,2)/2; }
+
+    function draw(ts) {
+      const dpr = devicePixelRatio;
+      const ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      t = (ts * 0.001) % CYCLE;
+
+      // Lignes triangle wave boucle infinie
+      lines.forEach((l, li) => {
+        const fromN = nodes[l.from], toN = nodes[l.to];
+        const phase    = (li * 0.25) % CYCLE;
+        const raw      = ((t - phase + CYCLE) % CYCLE) / (CYCLE * 0.45);
+        const tri      = raw < 1 ? raw : Math.max(0, 2 - raw);
+        const progress = Math.max(0, Math.min(1, ease(tri)));
+        const px = fromN.x + (toN.x - fromN.x) * progress;
+        const py = fromN.y + (toN.y - fromN.y) * progress;
+        const lw = l.cross ? 0.5 : Math.max(0.5, (toN.lo || 0.5) * 1.8);
+        const alpha = l.cross ? 0.12 : (toN.lo || 0.5);
+        ctx.beginPath();
+        ctx.moveTo(fromN.x, fromN.y);
+        ctx.lineTo(px, py);
+        ctx.strokeStyle = OR_RGBA(alpha * 0.72);
+        ctx.lineWidth = lw;
+        ctx.setLineDash(l.cross ? [3,5] : [6,4]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        if (progress > 0.05 && progress < 0.95) {
+          ctx.beginPath();
+          ctx.arc(px, py, l.cross ? 1.5 : lw * 1.8, 0, Math.PI*2);
+          ctx.fillStyle = OR_RGBA(0.92);
+          ctx.fill();
+        }
+      });
+
+      // Nœuds
+      nodes.forEach(n => {
+        const dx = mouse.x - n.x, dy = mouse.y - n.y;
+        const hover = Math.sqrt(dx*dx+dy*dy) < 55 && !n.main;
+        const rr = n.r * (hover ? 1.12 : 1);
+
+        // Fond + bordure avec clip
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, rr, 0, Math.PI*2);
+        ctx.fillStyle = n.main ? 'rgba(12,12,20,0.98)' : n.prospect ? 'rgba(14,14,22,0.55)' : 'rgba(22,22,32,0.95)';
+        ctx.fill();
+        if (n.prospect) {
+          ctx.setLineDash([7, 5]);
+          ctx.strokeStyle = OR_RGBA(0.75);
+          ctx.lineWidth = 2;
+        } else {
+          ctx.setLineDash([]);
+          ctx.strokeStyle = OR_RGBA(n.main ? 1 : hover ? 0.9 : (n.lo || 0.6));
+          ctx.lineWidth = n.main ? 2.5 : 1.5;
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Arc tournant style "réseau" sur la bulle prospect
+        if (n.prospect) {
+          const t2 = ts * 0.001;
+          // Anneau complet tournant (même style que le nœud central réseau)
+          ctx.save();
+          ctx.translate(n.x, n.y);
+          ctx.rotate(t2 * 0.6);
+          ctx.beginPath();
+          ctx.arc(0, 0, rr + 10, 0, Math.PI * 2);
+          ctx.strokeStyle = OR_RGBA(0.4);
+          ctx.lineWidth = 1.5;
+          ctx.setLineDash([10, 6]);
+          ctx.stroke();
+          ctx.restore();
+          // Second anneau contra-rotatif
+          ctx.save();
+          ctx.translate(n.x, n.y);
+          ctx.rotate(-t2 * 0.3);
+          ctx.beginPath();
+          ctx.arc(0, 0, rr + 22, 0, Math.PI * 2);
+          ctx.strokeStyle = OR_RGBA(0.18);
+          ctx.lineWidth = 1;
+          ctx.setLineDash([6, 10]);
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        // Anneau interne nœud central
+        if (n.main) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, rr * 0.68, 0, Math.PI*2);
+          ctx.strokeStyle = OR_RGBA(0.25);
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+
+        // Texte clippé dans la bulle
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, rr - 3, 0, Math.PI*2);
+        ctx.clip();
+        ctx.textAlign = 'center';
+        const labelAlpha = n.main ? 0.95 : hover ? 1 : (n.lo || 0.7);
+
+        if (n.prospect) {
+          ctx.fillStyle = OR_RGBA(0.88);
+          ctx.font = `200 ${Math.round(rr * 1.1)}px Inter,sans-serif`;
+          ctx.fillText('?', n.x, n.y + rr * 0.36);
+          ctx.fillStyle = OR_RGBA(0.60);
+          ctx.font = `600 ${Math.round(rr * 0.22)}px Inter,sans-serif`;
+          ctx.fillText('VOUS ?', n.x, n.y + rr * 0.72);
+        } else if (n.main) {
+          ctx.fillStyle = OR_RGBA(0.95);
+          ctx.font = `800 ${Math.round(rr * 0.26)}px Inter,sans-serif`;
+          ctx.fillText(n.label, n.x, n.y + Math.round(rr * 0.08));
+          ctx.fillStyle = 'rgba(138,138,154,0.75)';
+          ctx.font = `400 ${Math.round(rr * 0.17)}px Inter,sans-serif`;
+          ctx.fillText(n.sub, n.x, n.y + Math.round(rr * 0.30));
+        } else {
+          ctx.fillStyle = OR_RGBA(labelAlpha);
+          const fs = Math.max(8, Math.round(rr * 0.30));
+          ctx.font = `700 ${fs}px Inter,sans-serif`;
+          ctx.fillText(n.label, n.x, n.y + (n.sub ? -rr*0.10 : rr*0.12));
+          if (n.sub) {
+            ctx.fillStyle = `rgba(138,138,154,0.65)`;
+            ctx.font = `400 ${Math.max(7, Math.round(rr * 0.20))}px Inter,sans-serif`;
+            ctx.fillText(n.sub, n.x, n.y + rr * 0.28);
+          }
+        }
+        ctx.restore();
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    wrap.addEventListener('mousemove', e => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    wrap.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; });
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(draw);
+  })();
+  </script>
+
+  <script>
+  // ── TOUCH / SCROLL REVEAL sur les cartes ──
+  (function() {
+    const cards = document.querySelectorAll('.part-card');
+
+    // Touch : classe "touched" temporaire
+    cards.forEach(card => {
+      card.addEventListener('touchstart', () => {
+        card.classList.add('touched');
+      }, { passive: true });
+      card.addEventListener('touchend', () => {
+        setTimeout(() => card.classList.remove('touched'), 600);
+      }, { passive: true });
+    });
+
+    // IntersectionObserver : fade-in au scroll (mobile & desktop)
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = entry.target.classList.contains('mayotte-wide')
+              ? 'none'
+              : 'translateY(0)';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      cards.forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(24px)';
+        card.style.transition += `, opacity 0.6s ease ${i * 0.07}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 0.07}s`;
+        observer.observe(card);
+      });
+    }
+  })();
+  </script>
+
+  <!-- BANNER COOKIE RGPD -->
+  <div id="cookie-banner" style="position:fixed; bottom:0; left:0; right:0; z-index:998; background:rgba(14,14,22,0.97); border-top:1px solid rgba(201,168,76,0.2); padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap;">
+    <p style="font-size:0.78rem; color:var(--texte-muted); line-height:1.6; margin:0; max-width:700px;">
+      Ce site ne dépose aucun cookie de traçage. Les données saisies dans le formulaire de contact sont utilisées uniquement pour répondre à votre demande, conformément au <strong style="color:var(--creme);">RGPD</strong> et à notre
+      <a href="#mentions" onclick="document.getElementById('mentions-modal').style.display='flex'" style="color:var(--or); text-decoration:underline;">politique de confidentialité</a>.
+    </p>
+    <button onclick="document.getElementById('cookie-banner').style.display='none'; localStorage.setItem('cookieConsent','1')" style="background:var(--or); color:var(--noir); font-family:'Inter',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.6rem 1.5rem; border:none; border-radius:2px; cursor:pointer; white-space:nowrap; flex-shrink:0;">J'ai compris</button>
+  </div>
+  <script>if (localStorage.getItem('cookieConsent') === '1') { document.getElementById('cookie-banner').style.display = 'none'; }</script>
+
+  <!-- MODAL CGU -->
+  <div id="cgu-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999; align-items:center; justify-content:center; padding:2rem;">
+    <div style="background:var(--ardoise); border:1px solid rgba(201,168,76,0.2); border-radius:2px; max-width:700px; width:100%; max-height:85vh; overflow-y:auto; padding:3rem; position:relative;">
+      <button onclick="document.getElementById('cgu-modal').style.display='none'" style="position:absolute; top:1.25rem; right:1.25rem; background:none; border:none; color:var(--texte-muted); font-size:1.5rem; cursor:pointer;">×</button>
+      <p style="font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--or); margin-bottom:1.5rem;">CGU</p>
+      <h2 style="font-family:'Playfair Display',serif; font-size:1.75rem; color:var(--blanc); margin-bottom:2rem;">Conditions d'utilisation</h2>
+      <div style="display:flex; flex-direction:column; gap:1.75rem;">
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Objet</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Le présent site est édité par SORIANE à titre informatif. Il ne constitue pas une offre de services financiers ni un conseil en investissement au sens AMF.</p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Données personnelles (RGPD)</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Les données collectées via le formulaire sont utilisées exclusivement pour répondre à votre demande. Conservation 3 ans max. Droit d'accès/rectification/suppression : <a href="mailto:contact@soriane.fr" style="color:var(--or);">contact@soriane.fr</a>. Aucune donnée transmise à des tiers.</p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Cookies</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Aucun cookie publicitaire ni de traçage. Un localStorage mémorise uniquement votre acceptation de la présente notice.</p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Droit applicable</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Droit français. Tribunal du ressort de St-Denis de La Réunion.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL MENTIONS LÉGALES -->
+  <div id="mentions-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999; align-items:center; justify-content:center; padding:2rem;">
+    <div style="background:var(--ardoise); border:1px solid rgba(201,168,76,0.2); border-radius:2px; max-width:700px; width:100%; max-height:85vh; overflow-y:auto; padding:3rem; position:relative;">
+      <button onclick="document.getElementById('mentions-modal').style.display='none'" style="position:absolute; top:1.25rem; right:1.25rem; background:none; border:none; color:var(--texte-muted); font-size:1.5rem; cursor:pointer;">×</button>
+      <p style="font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--or); margin-bottom:1.5rem;">Mentions légales</p>
+      <h2 style="font-family:'Playfair Display',serif; font-size:1.75rem; color:var(--blanc); margin-bottom:2rem;">Informations légales</h2>
+      <div style="display:flex; flex-direction:column; gap:2rem;">
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Éditeur du site</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;"><strong style="color:var(--creme);">SORIANE</strong> — <em>Be fully realised</em><br>Société par Actions Simplifiée<br>11 Allée de la Palmeraie, 97460 St-Paul, La Réunion<br>SIRET : 990 649 725 00019 · APE 7022Z<br>Téléphone : <a href="tel:+262692286028" style="color:var(--creme); text-decoration:none;">06 92 28 60 28</a></p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Responsable de la publication</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Le Président de SORIANE · <a href="tel:+262692286028" style="color:var(--creme); text-decoration:none;">06 92 28 60 28</a></p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Hébergement</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;"><em>[à compléter selon hébergeur retenu]</em></p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Propriété intellectuelle</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">L'ensemble des contenus est la propriété exclusive de SORIANE. Toute reproduction sans accord écrit est interdite.</p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Données personnelles</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Conformément au RGPD (UE 2016/679), vous disposez d'un droit d'accès, rectification et suppression : <a href="mailto:contact@soriane.fr" style="color:var(--or);">contact@soriane.fr</a>. Aucune donnée transmise à des tiers.</p></div>
+        <div><h3 style="font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--or); margin-bottom:0.75rem;">Droit applicable</h3><p style="font-size:0.88rem; color:var(--texte-muted); line-height:1.8;">Droit français. Tribunaux du ressort de St-Denis de La Réunion.</p></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
