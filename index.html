@@ -93,7 +93,7 @@
       grid-template-columns: 1fr 1fr;
       align-items: center;
       position: relative;
-      padding: 6rem 3rem 4rem;
+      padding: 5rem 3rem 3rem;
       overflow: hidden;
       gap: 2rem;
       background: var(--noir);
@@ -762,7 +762,7 @@
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
-      #hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+      #hero { grid-template-columns: 1fr; padding: 5rem 1.5rem 3rem; min-height: 100svh; }
       .hero-anim-wrap { display: none; }
       section { padding: 5rem 1.5rem; }
       .adn-grid { grid-template-columns: 1fr; }
@@ -1910,9 +1910,22 @@
       Ce site ne dépose aucun cookie de traçage. Les données saisies dans le formulaire de contact sont utilisées uniquement pour répondre à votre demande, conformément au <strong style="color:var(--creme);">RGPD</strong> et à notre
       <a href="#mentions" onclick="document.getElementById('mentions-modal').style.display='flex'" style="color:var(--or); text-decoration:underline;">politique de confidentialité</a>.
     </p>
-    <button onclick="document.getElementById('cookie-banner').style.display='none'; localStorage.setItem('cookieConsent','1')" style="background:var(--or); color:var(--noir); font-family:'Inter',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.6rem 1.5rem; border:none; border-radius:2px; cursor:pointer; white-space:nowrap; flex-shrink:0;">J'ai compris</button>
+    <button id="cookie-btn" style="background:var(--or); color:var(--noir); font-family:'Inter',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.6rem 1.5rem; border:none; border-radius:2px; cursor:pointer; white-space:nowrap; flex-shrink:0;">J'ai compris</button>
   </div>
-  <script>if (localStorage.getItem('cookieConsent') === '1') { document.getElementById('cookie-banner').style.display = 'none'; }</script>
+  <script>
+  (function() {
+    function hideCookie() {
+      var b = document.getElementById('cookie-banner');
+      if (b) b.style.display = 'none';
+      try { localStorage.setItem('cookieConsent','1'); } catch(e) {}
+    }
+    var btn = document.getElementById('cookie-btn');
+    if (btn) btn.addEventListener('click', hideCookie);
+    try {
+      if (localStorage.getItem('cookieConsent') === '1') hideCookie();
+    } catch(e) {}
+  })();
+  </script>
 
   <!-- MODAL CGU -->
   <div id="cgu-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999; align-items:center; justify-content:center; padding:2rem;">
@@ -2544,9 +2557,22 @@
       Ce site ne dépose aucun cookie de traçage. Les données saisies dans le formulaire de contact sont utilisées uniquement pour répondre à votre demande, conformément au <strong style="color:var(--creme);">RGPD</strong> et à notre
       <a href="#mentions" onclick="document.getElementById('mentions-modal').style.display='flex'" style="color:var(--or); text-decoration:underline;">politique de confidentialité</a>.
     </p>
-    <button onclick="document.getElementById('cookie-banner').style.display='none'; localStorage.setItem('cookieConsent','1')" style="background:var(--or); color:var(--noir); font-family:'Inter',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.6rem 1.5rem; border:none; border-radius:2px; cursor:pointer; white-space:nowrap; flex-shrink:0;">J'ai compris</button>
+    <button id="cookie-btn" style="background:var(--or); color:var(--noir); font-family:'Inter',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.6rem 1.5rem; border:none; border-radius:2px; cursor:pointer; white-space:nowrap; flex-shrink:0;">J'ai compris</button>
   </div>
-  <script>if (localStorage.getItem('cookieConsent') === '1') { document.getElementById('cookie-banner').style.display = 'none'; }</script>
+  <script>
+  (function() {
+    function hideCookie() {
+      var b = document.getElementById('cookie-banner');
+      if (b) b.style.display = 'none';
+      try { localStorage.setItem('cookieConsent','1'); } catch(e) {}
+    }
+    var btn = document.getElementById('cookie-btn');
+    if (btn) btn.addEventListener('click', hideCookie);
+    try {
+      if (localStorage.getItem('cookieConsent') === '1') hideCookie();
+    } catch(e) {}
+  })();
+  </script>
 
   <!-- MODAL CGU -->
   <div id="cgu-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999; align-items:center; justify-content:center; padding:2rem;">
