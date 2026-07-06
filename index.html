@@ -114,7 +114,9 @@
       align-items: center;
       justify-content: center;
       width: 100%;
-      height: 680px;
+      aspect-ratio: 16 / 7;
+      height: auto;
+      min-height: 320px;
     }
 
     #heroCanvas {
@@ -762,8 +764,8 @@
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
-      #hero { grid-template-columns: 1fr; padding: 5rem 1.5rem 3rem; min-height: 100svh; }
-      .hero-anim-wrap { display: none; }
+      #hero { grid-template-columns: 1fr; padding: 5rem 1.5rem 2rem; min-height: auto; }
+      .hero-anim-wrap { display: flex; width: 100%; aspect-ratio: 1/1; }
       section { padding: 5rem 1.5rem; }
       .adn-grid { grid-template-columns: 1fr; }
       .approche-layout { grid-template-columns: 1fr; gap: 3rem; }
@@ -1088,7 +1090,7 @@
       <!-- ── 10POSITIF (1er investissement) ── -->
       <div class="part-card">
         <span class="part-badge">IT &amp; Numérique</span>
-        <h3 class="part-name">10Positif</h3>
+        <h3 class="part-name" id="card-esn">10Positif</h3>
         <p class="part-desc">ESN basée à La Réunion, spécialisée en développement sur mesure et édition logicielle. Éditeur de <strong style="color:var(--or-clair)">Lithopedia</strong>, application mobile disponible sur iOS &amp; Android, et partenaire technologique de référence dans le secteur de la LLD.</p>
         <div class="part-meta">
           <div class="part-meta-item">
@@ -1109,7 +1111,7 @@
       <!-- ── SCI ZIRONDELLES 233 ── -->
       <div class="part-card">
         <span class="part-badge">Immobilier · SCI</span>
-        <h3 class="part-name">SCI Zirondelles 233</h3>
+        <h3 class="part-name" id="card-sci">SCI Zirondelles 233</h3>
         <p class="part-desc">Deux villas T5 avec piscine, secteur Ouest de La Réunion. Opération montée en montage en défiscalisation : réduction fiscale dès l'année 1, bien livré clé en main, rendement locatif immédiat. Un modèle que SORIANE a monté en y investissant son propre capital — et qu'elle propose à des co-investisseurs pour les prochaines opérations.</p>
         <div class="part-meta">
           <div class="part-meta-item">
@@ -1174,7 +1176,7 @@
       <!-- ── TI CAZ LILINE ── -->
       <div class="part-card">
         <span class="part-badge">Location saisonnière</span>
-        <h3 class="part-name">Ti Caz Liline</h3>
+        <h3 class="part-name" id="card-reunion">Ti Caz Liline</h3>
         <p class="part-desc">Gîte de charme à Ravine des Cabris, St-Pierre (Sud). Hébergement touristique authentique au cœur des hauts du Sud réunionnais — confort, nature et immersion créole.</p>
         <div class="part-meta">
           <div class="part-meta-item">
@@ -1272,7 +1274,7 @@
       <!-- ── LITHOPEDIA ── -->
       <div class="part-card">
         <span class="part-badge">Application mobile · Bien-être</span>
-        <h3 class="part-name">Lithopedia 💎</h3>
+        <h3 class="part-name" id="card-app">Lithopedia 💎</h3>
         <p class="part-desc">Encyclopédie mobile de la lithothérapie — toutes les pierres et cristaux au creux de la main. Propriétés, vertus, chakras, purifications, remèdes ciblés. Développée en partenariat avec une lithothérapeute professionnelle. Disponible sur iOS &amp; Android.</p>
         <div class="part-meta">
           <div class="part-meta-item">
@@ -1301,7 +1303,7 @@
         <div class="mayotte-inner">
           <div class="mayotte-left">
             <span class="part-badge" style="border-color:rgba(201,168,76,0.25); color:rgba(201,168,76,0.65);">Projet d'expansion</span>
-            <h3 class="part-name" style="color:rgba(255,255,255,0.7); font-size:2rem;">Mayotte</h3>
+            <h3 class="part-name" style="color:rgba(255,255,255,0.7); font-size:2rem;" id="card-mayotte">Mayotte</h3>
             <p class="part-desc" style="color:rgba(138,138,154,0.75);">Mayotte est notre prochaine zone d'expansion en défiscalisation immobilière — individuel et collectif (immeuble). Le dispositif Girardin y est applicable, le marché locatif est sous-offrert et la croissance démographique est forte. Vous avez un terrain ou du capital à Mayotte ? Contactez-nous.</p>
           </div>
           <div class="part-meta mayotte-meta">
@@ -1509,7 +1511,9 @@
 
       function resize() {
         W = wrap.offsetWidth;
-        H = canvas.offsetHeight || 220;
+        // Calculer H depuis le ratio 16/7 si le wrap n'a pas encore de hauteur
+        H = wrap.offsetHeight > 50 ? wrap.offsetHeight : Math.round(W * 7 / 16);
+        H = Math.max(H, 280); // minimum 280px
         canvas.width  = W * devicePixelRatio;
         canvas.height = H * devicePixelRatio;
         canvas.style.width  = W + 'px';
@@ -1674,17 +1678,15 @@
     let nodes = [], lines = [];
     const CYCLE = 4.5;
 
-    // Types de projets éligibles gravitant autour de SORIANE
+    // 6 nœuds + VOUS? — espacés uniformément
     const DEFS = [
-      { a: Math.PI,           d: 0.80, r: 46, label: 'SCI',      sub: 'IMMOBILIER',  lo: 0.92 },
-      { a: Math.PI*1.32,      d: 0.82, r: 44, label: 'SAAS',     sub: 'LOGICIEL',    lo: 0.86 },
-      { a: Math.PI*0.80,      d: 0.82, r: 44, label: 'ESN',      sub: 'NUMÉRIQUE',   lo: 0.86 },
-      { a: Math.PI*1.68,      d: 0.84, r: 42, label: 'APP',      sub: 'MOBILE',      lo: 0.80 },
-      { a: Math.PI*0.30,      d: 0.84, r: 42, label: 'RÉUNION',  sub: null,          lo: 0.76 },
-      { a: 0,                 d: 0.78, r: 40, label: 'MAYOTTE',   sub: null,          lo: 0.70 },
-      { a: Math.PI*1.5,       d: 0.76, r: 38, label: 'MADA',     sub: null,          lo: 0.64 },
-      { a: Math.PI*1.15,      d: 0.90, r: 32, label: 'AUTRES',   sub: 'PROJETS',     lo: 0.50 },
-      { a: Math.PI*0.48,      d: 0.68, r: 70, label: '?',        sub: 'VOUS ?',      lo: 0.92, prospect: true },
+      { a: Math.PI * 1.00, d: 0.62, r: 38, label: 'SCI',     sub: 'IMMO',      lo: 0.92 },
+      { a: Math.PI * 1.28, d: 0.62, r: 38, label: 'SAAS',    sub: 'LOGICIEL',  lo: 0.86 },
+      { a: Math.PI * 1.57, d: 0.62, r: 36, label: 'ESN',     sub: 'NUMÉRIQUE', lo: 0.86 },
+      { a: Math.PI * 1.85, d: 0.62, r: 36, label: 'APP',     sub: 'MOBILE',    lo: 0.80 },
+      { a: Math.PI * 0.14, d: 0.62, r: 36, label: 'RÉUNION', sub: null,        lo: 0.76 },
+      { a: Math.PI * 0.42, d: 0.62, r: 36, label: 'MAYOTTE', sub: null,        lo: 0.70 },
+      { a: Math.PI * 0.71, d: 0.68, r: 54, label: '?',       sub: 'VOUS ?',    lo: 0.92, prospect: true },
     ];
 
     function resize() {
@@ -1701,9 +1703,9 @@
     function buildNodes() {
       const maxNodeR = Math.max(...DEFS.map(d => d.r));
       const maxDist  = Math.max(...DEFS.map(d => d.d));
-      const avail    = H / 2 - maxNodeR - 12;
-      const base     = avail / maxDist;
-      nodes = [{ x: cx, y: cy, r: 46, label: 'SORIANE', sub: 'INVEST.', main: true }];
+      const avail    = Math.min(W, H) / 2 - maxNodeR - 8;
+      const base     = Math.max(55, avail / maxDist);
+      nodes = [{ x: cx, y: cy, r: 30, label: 'SORIANE', sub: 'INVEST.', main: true }];
       DEFS.forEach(d => {
         nodes.push({
           x: cx + Math.cos(d.a) * base * d.d,
@@ -1726,6 +1728,11 @@
       const ctx = canvas.getContext('2d');
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
+      // Clip global — rien ne déborde hors du canvas
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(0, 0, W, H);
+      ctx.clip();
       t = (ts * 0.001) % CYCLE;
 
       // Lignes triangle wave boucle infinie
@@ -1778,31 +1785,16 @@
         ctx.stroke();
         ctx.setLineDash([]);
 
-        // Arc tournant style "réseau" sur la bulle prospect
+        // Halo animé autour de la bulle prospect (dans les limites du canvas)
         if (n.prospect) {
-          const t2 = ts * 0.001;
-          // Anneau complet tournant (même style que le nœud central réseau)
-          ctx.save();
-          ctx.translate(n.x, n.y);
-          ctx.rotate(t2 * 0.6);
+          const pulse = 0.6 + 0.4 * Math.sin(ts * 0.002);
           ctx.beginPath();
-          ctx.arc(0, 0, rr + 10, 0, Math.PI * 2);
-          ctx.strokeStyle = OR_RGBA(0.4);
+          ctx.arc(n.x, n.y, rr + 8, 0, Math.PI * 2);
+          ctx.strokeStyle = OR_RGBA(0.3 * pulse);
           ctx.lineWidth = 1.5;
-          ctx.setLineDash([10, 6]);
+          ctx.setLineDash([8, 6]);
           ctx.stroke();
-          ctx.restore();
-          // Second anneau contra-rotatif
-          ctx.save();
-          ctx.translate(n.x, n.y);
-          ctx.rotate(-t2 * 0.3);
-          ctx.beginPath();
-          ctx.arc(0, 0, rr + 22, 0, Math.PI * 2);
-          ctx.strokeStyle = OR_RGBA(0.18);
-          ctx.lineWidth = 1;
-          ctx.setLineDash([6, 10]);
-          ctx.stroke();
-          ctx.restore();
+          ctx.setLineDash([]);
         }
 
         // Anneau interne nœud central
@@ -1850,6 +1842,7 @@
         ctx.restore();
       });
 
+      ctx.restore(); // fin clip global
       requestAnimationFrame(draw);
     }
 
@@ -1857,11 +1850,47 @@
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
+      // Curseur pointer si survol d'un nœud
+      let onNode = false;
+      nodes.forEach(n => {
+        const dx = mouse.x - n.x, dy = mouse.y - n.y;
+        if (Math.sqrt(dx*dx+dy*dy) < n.r) onNode = true;
+      });
+      canvas.style.cursor = onNode ? 'pointer' : 'default';
     });
-    wrap.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; });
+    wrap.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; canvas.style.cursor='default'; });
+
+    // Mapping label → ancre
+    const LINKS = {
+      'SCI':     '#card-sci',
+      'SAAS':    '#card-app',
+      'ESN':     '#card-esn',
+      'APP':     '#card-app',
+      'RÉUNION': '#card-reunion',
+      'MAYOTTE': '#card-mayotte',
+      '?':       '#contact',
+    };
+
+    function handleClick(e) {
+      const rect = canvas.getBoundingClientRect();
+      const mx = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+      const my = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+      nodes.forEach(n => {
+        const dx = mx - n.x, dy = my - n.y;
+        if (Math.sqrt(dx*dx+dy*dy) < n.r + 5) {
+          const target = LINKS[n.label];
+          if (target) {
+            const el = document.querySelector(target);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      });
+    }
+    wrap.addEventListener('click', handleClick);
+    wrap.addEventListener('touchend', e => { e.preventDefault(); handleClick(e); }, { passive: false });
     window.addEventListener('resize', resize);
-    resize();
-    requestAnimationFrame(draw);
+    // Délai pour laisser le DOM calculer les dimensions correctement
+    setTimeout(function() { resize(); requestAnimationFrame(draw); }, 50);
   })();
   </script>
 
@@ -1913,7 +1942,7 @@
     <button id="cookie-btn" style="background:var(--or); color:var(--noir); font-family:'Inter',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.6rem 1.5rem; border:none; border-radius:2px; cursor:pointer; white-space:nowrap; flex-shrink:0;">J'ai compris</button>
   </div>
   <script>
-  (function() {
+  document.addEventListener('DOMContentLoaded', function() {
     function hideCookie() {
       var b = document.getElementById('cookie-banner');
       if (b) b.style.display = 'none';
@@ -1924,7 +1953,7 @@
     try {
       if (localStorage.getItem('cookieConsent') === '1') hideCookie();
     } catch(e) {}
-  })();
+  });
   </script>
 
   <!-- MODAL CGU -->
@@ -1982,21 +2011,23 @@
 
     function resize() {
       W = wrap.offsetWidth;
-      // Calculer H depuis le ratio 16/9 appliqué au CSS
       H = Math.round(W * 3 / 4);
       canvas.width  = W * devicePixelRatio;
       canvas.height = H * devicePixelRatio;
       canvas.style.width  = W + 'px';
       canvas.style.height = H + 'px';
       cx = W / 2; cy = H / 2;
-      // Base dynamique depuis H (axe limitant vertical)
+      // Base dynamique : marge généreuse pour que rien ne déborde
       const maxR = Math.max(...DEFS.map(d => d.r));
       const maxD = Math.max(...DEFS.map(d => d.d));
-      const avail = H / 2 - maxR - 14;
-      const base  = avail / maxD;
+      const avail = Math.min(W, H) / 2 - maxR - 20;
+      const base  = Math.max(10, avail / maxD);
       DEFS.forEach(d => {
         d.px = cx + Math.cos(d.a) * base * d.d;
         d.py = cy + Math.sin(d.a) * base * d.d;
+        // Clamp : forcer les bulles à rester dans le canvas
+        d.px = Math.max(d.r + 4, Math.min(W - d.r - 4, d.px));
+        d.py = Math.max(d.r + 4, Math.min(H - d.r - 4, d.py));
       });
     }
 
@@ -2007,6 +2038,11 @@
       const ctx = canvas.getContext('2d');
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
+      // Clip global — rien ne déborde hors du canvas
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(0, 0, W, H);
+      ctx.clip();
       t = (ts * 0.001) % CYCLE;
 
       // Lignes animées triangle wave
@@ -2123,11 +2159,11 @@
       ctx.fillText('SORIANE', cx, cy + Math.round(pr * 0.30));
       ctx.restore();
 
+      ctx.restore(); // fin du clip global
       requestAnimationFrame(draw);
     }
 
     window.addEventListener('resize', () => { resize(); });
-    // Délai pour laisser le DOM calculer le layout
     setTimeout(() => { resize(); requestAnimationFrame(draw); }, 100);
   })();
   </script>html>
@@ -2156,7 +2192,9 @@
 
       function resize() {
         W = wrap.offsetWidth;
-        H = canvas.offsetHeight || 220;
+        // Calculer H depuis le ratio 16/7 si le wrap n'a pas encore de hauteur
+        H = wrap.offsetHeight > 50 ? wrap.offsetHeight : Math.round(W * 7 / 16);
+        H = Math.max(H, 280); // minimum 280px
         canvas.width  = W * devicePixelRatio;
         canvas.height = H * devicePixelRatio;
         canvas.style.width  = W + 'px';
@@ -2348,9 +2386,9 @@
     function buildNodes() {
       const maxNodeR = Math.max(...DEFS.map(d => d.r));
       const maxDist  = Math.max(...DEFS.map(d => d.d));
-      const avail    = H / 2 - maxNodeR - 12;
-      const base     = avail / maxDist;
-      nodes = [{ x: cx, y: cy, r: 46, label: 'SORIANE', sub: 'INVEST.', main: true }];
+      const avail    = Math.min(W, H) / 2 - maxNodeR - 8;
+      const base     = Math.max(55, avail / maxDist);
+      nodes = [{ x: cx, y: cy, r: 30, label: 'SORIANE', sub: 'INVEST.', main: true }];
       DEFS.forEach(d => {
         nodes.push({
           x: cx + Math.cos(d.a) * base * d.d,
@@ -2373,6 +2411,11 @@
       const ctx = canvas.getContext('2d');
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
+      // Clip global — rien ne déborde hors du canvas
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(0, 0, W, H);
+      ctx.clip();
       t = (ts * 0.001) % CYCLE;
 
       // Lignes triangle wave boucle infinie
@@ -2497,6 +2540,7 @@
         ctx.restore();
       });
 
+      ctx.restore(); // fin clip global
       requestAnimationFrame(draw);
     }
 
@@ -2504,11 +2548,47 @@
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
+      // Curseur pointer si survol d'un nœud
+      let onNode = false;
+      nodes.forEach(n => {
+        const dx = mouse.x - n.x, dy = mouse.y - n.y;
+        if (Math.sqrt(dx*dx+dy*dy) < n.r) onNode = true;
+      });
+      canvas.style.cursor = onNode ? 'pointer' : 'default';
     });
-    wrap.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; });
+    wrap.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; canvas.style.cursor='default'; });
+
+    // Mapping label → ancre
+    const LINKS = {
+      'SCI':     '#card-sci',
+      'SAAS':    '#card-app',
+      'ESN':     '#card-esn',
+      'APP':     '#card-app',
+      'RÉUNION': '#card-reunion',
+      'MAYOTTE': '#card-mayotte',
+      '?':       '#contact',
+    };
+
+    function handleClick(e) {
+      const rect = canvas.getBoundingClientRect();
+      const mx = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+      const my = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+      nodes.forEach(n => {
+        const dx = mx - n.x, dy = my - n.y;
+        if (Math.sqrt(dx*dx+dy*dy) < n.r + 5) {
+          const target = LINKS[n.label];
+          if (target) {
+            const el = document.querySelector(target);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      });
+    }
+    wrap.addEventListener('click', handleClick);
+    wrap.addEventListener('touchend', e => { e.preventDefault(); handleClick(e); }, { passive: false });
     window.addEventListener('resize', resize);
-    resize();
-    requestAnimationFrame(draw);
+    // Délai pour laisser le DOM calculer les dimensions correctement
+    setTimeout(function() { resize(); requestAnimationFrame(draw); }, 50);
   })();
   </script>
 
@@ -2551,28 +2631,7 @@
   })();
   </script>
 
-  <!-- BANNER COOKIE RGPD -->
-  <div id="cookie-banner" style="position:fixed; bottom:0; left:0; right:0; z-index:998; background:rgba(14,14,22,0.97); border-top:1px solid rgba(201,168,76,0.2); padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap;">
-    <p style="font-size:0.78rem; color:var(--texte-muted); line-height:1.6; margin:0; max-width:700px;">
-      Ce site ne dépose aucun cookie de traçage. Les données saisies dans le formulaire de contact sont utilisées uniquement pour répondre à votre demande, conformément au <strong style="color:var(--creme);">RGPD</strong> et à notre
-      <a href="#mentions" onclick="document.getElementById('mentions-modal').style.display='flex'" style="color:var(--or); text-decoration:underline;">politique de confidentialité</a>.
-    </p>
-    <button id="cookie-btn" style="background:var(--or); color:var(--noir); font-family:'Inter',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.6rem 1.5rem; border:none; border-radius:2px; cursor:pointer; white-space:nowrap; flex-shrink:0;">J'ai compris</button>
-  </div>
-  <script>
-  (function() {
-    function hideCookie() {
-      var b = document.getElementById('cookie-banner');
-      if (b) b.style.display = 'none';
-      try { localStorage.setItem('cookieConsent','1'); } catch(e) {}
-    }
-    var btn = document.getElementById('cookie-btn');
-    if (btn) btn.addEventListener('click', hideCookie);
-    try {
-      if (localStorage.getItem('cookieConsent') === '1') hideCookie();
-    } catch(e) {}
-  })();
-  </script>
+
 
   <!-- MODAL CGU -->
   <div id="cgu-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999; align-items:center; justify-content:center; padding:2rem;">
